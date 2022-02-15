@@ -1,209 +1,1232 @@
-{% assign custom_blocks_enabled = true %}
-{% assign category_list_enabled = true %}
-{% assign category_tree_enabled = false %}
-{% assign recent_articles_enabled = false %}
-{% assign popular_posts_enabled = true %}
+{% if portal.has_solutions %}
+<style media="screen">
+  .search-results {
+    box-shadow: 0 0 30px rgb(0 0 0 / 20%);
+    background: #fff;
+    padding: 15px 30px;
+    width: 80%;
+    margin: auto;
+    position: relative;
+    margin-top: -60px;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    display: none;
+  }
 
-{% if custom_blocks_enabled %}
-  <div class="row custom-blocks" id="custom-blocks">
-    <div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="http://support.bikesonline.com/support/solutions/folders/48000633722">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 24 24" height="24" width="24">
-              <g transform="matrix(1,0,0,1,0,0)">
-                  <path d="M 8,15.5c1.381,0,2.5,1.119,2.5,2.5S9.381,20.5,8,20.5S5.5,19.381,5.5,18S6.619,15.5,8,15.5z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 19,15.5 c1.381,0,2.5,1.119,2.5,2.5s-1.119,2.5-2.5,2.5s-2.5-1.119-2.5-2.5S17.619,15.5,19,15.5z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 8.5,13.5v-9c0-0.552,0.448-1,1-1h13 c0.552,0,1,0.448,1,1v13 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 12.5,17.5h2 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 3.5,18.5h-2c-0.552,0-1-0.448-1-1v-6c0.007-2.206,1.794-3.993,4-4h4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 0.5,16.5H4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 0.5,12.5 h8" stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">Shipping</h3>
-      </a>
-    </div>
-    <div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="https://support.bikesonline.com/support/solutions/48000430350">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 24 24" height="24" width="24">
-              <g transform="matrix(1,0,0,1,0,0)">
-                  <path d="M 14.5,12c0-1.381-1.119-2.5-2.5-2.5S9.5,10.619,9.5,12v3.5h5V12z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 12,12.5L19,6 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 14.5,12.5H22 c0.828,0,1.5,0.672,1.5,1.5s-0.672,1.5-1.5,1.5H2c-0.828,0-1.5-0.672-1.5-1.5s0.672-1.5,1.5-1.5h7.5 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 22,15.5l-2.2,7.046 c-0.178,0.568-0.705,0.955-1.3,0.954h-13c-0.595,0.001-1.122-0.386-1.3-0.954L2,15.5 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 10.5,17.5v4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 7.5,17.5v4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 13.5,17.5v4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 16.5,17.5v4 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 7.5,7.5l-7-7 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 4.5,0.5h-4v4" stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">Returns & Exchange</h3>
-      </a>
-    </div>
-    <div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="https://support.bikesonline.com/support/solutions/48000430576">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 24 24" height="24" width="24">
-              <g transform="matrix(1,0,0,1,0,0)">
-                  <path d="M 4.148,14.034L0.56,20.181c-0.138,0.238-0.028,0.395,0.243,0.349l3.358-0.569l1.164,3.2 c0.094,0.258,0.286,0.277,0.427,0.04l3.065-5.148 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 19.852,14.034l3.588,6.147c0.138,0.238,0.028,0.395-0.243,0.349l-3.358-0.569 l-1.164,3.2c-0.094,0.258-0.286,0.277-0.427,0.04l-3.065-5.148 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 12,0.632c4.971,0,9,4.029,9,9s-4.029,9-9,9s-9-4.029-9-9 S7.029,0.632,12,0.632z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M 15.94,7.162l-4.72,4.72c-0.293,0.293-0.768,0.293-1.061,0c0,0,0,0,0,0l-1.72-1.72" stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">Warranty</h3>
-      </a>
-    </div>
-    <!--<div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="{{portal.solutions_home_url}}">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <g>
-              <g stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" fill="none">
-                <path d="M11.5 5c0-1.934 5.148-3.5 11-3.5v16.5c-5.852 0-11 1.566-11 3.5 0-1.934-5.149-3.5-11-3.5v-16.5c5.851 0 11 1.566 11 3.5zM11.5 5v16.375M9 7.24c-1.61-.616-3.887-1.063-6.5-1.24M9 10.24c-1.61-.616-3.887-1.063-6.5-1.24M9 13.24c-1.61-.616-3.887-1.063-6.5-1.24M9 16.24c-1.61-.616-3.887-1.063-6.5-1.24M14 7.24c1.61-.617 3.887-1.063 6.5-1.24M14 10.24c1.61-.617 3.887-1.063 6.5-1.24M14 13.24c1.61-.617 3.887-1.063 6.5-1.24M14 16.24c1.61-.617 3.887-1.063 6.5-1.24"/>
-              </g>
-            </g>
-            <path hidden fill="none" d="M0 0h24v24h-24z"/>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">How to Guides</h3>
-      </a>
-    </div>-->
-    <div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="http://support.bikesonline.com/support/solutions/folders/48000633721">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 24 24" height="24" width="24">
-            <g transform="matrix(1,0,0,1,0,0)">
-                <path d="M 12,1.001c6.075,0,11,4.925,11,11s-4.925,11-11,11s-11-4.925-11-11S5.925,1.001,12,1.001z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M 12,17 c-0.138,0-0.25,0.112-0.25,0.25S11.862,17.5,12,17.5s0.25-0.112,0.25-0.25S12.138,17,12,17L12,17 " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M 9,10.005c0-1.657,1.344-3,3-3 c1.657,0,3,1.344,3,3c0,1.193-0.707,2.272-1.8,2.749c-0.729,0.318-1.2,1.038-1.2,1.833V15" stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">FAQ</h3>
-      </a>
+  .search .search-results {
+    opacity: 1;
+    display: block;
+  }
+
+
+  #search-results {
+    overflow: hidden;
+    max-height: 0;
+    margin: auto;
+    transition: all .5s ease-in-out;
+  }
+
+  .search #search-results {
+    max-height: unset;
+  }
+
+  .search-title {
+    font-size: 17px;
+    margin: auto;
+  }
+
+  .r-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .r-item {
+    margin: auto;
+    list-style: none;
+    padding: 22px 0;
+    position: relative;
+    background: #fff;
+    border-bottom: 1px solid #efefef;
+    cursor: pointer;
+  }
+
+  .r-title {
+    font-weight: 700;
+    display: block;
+    color: #565656;
+    font-size: 18px;
+  }
+
+  .r-desc {
+    margin-top: 0.5em;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .match {
+    background-color: #bbe6f7;
+  }
+
+
+
+  .top-solutions {
+    overflow: hidden;
+    transition: all .5s ease-in-out;
+    padding: 30px;
+    margin: -30px -25px 0;
+  }
+
+  .search .top-solutions {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
+  .top-solutions-title {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 15px;
+    color:#00a7d1;
+    font-style:italic;
+  }
+
+  .top-solution {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: all .5s ease-in-out;
+  }
+
+  .top-solution.active {
+    background: #edfaff;
+  }
+
+  .top-solution-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .top-solution-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #565656;
+    display: inline-block;
+  }
+
+  .top-solution .img-wrap {
+    width: 24px;
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  .top-solution img {
+    filter: invert(68%) sepia(75%) saturate(5240%) hue-rotate(158deg) brightness(94%) contrast(101%);
+  }
+
+
+  .solutions-index-home {
+    width: 100%;
+  }
+
+  .main-tabs {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .tabmenu {
+    display: block;
+    background: none;
+    outline: none;
+    border: 0;
+  }
+
+  .main-tabs .tabmenu {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin: 5px 0;
+    background: #efefef;
+    width: calc(50% - 5px);
+    padding: 20px 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    font-size: 16px;
+    transition: all 0.5s ease-in-out;
+    min-height: 65px;
+    color: #565656;
+  }
+
+  .main-tabs .tabmenu:last-child {
+    margin-right: 0;
+  }
+
+  .main-tabs .bi {
+    display: block;
+    margin-right: 10px;
+    font-size: 1.6em;
+    width: 25px;
+    opacity: .5;
+  }
+
+  .main-tabs .tabmenu.active {
+    background-color: #00a7d1;
+    color: #fff;
+  }
+
+  .main-tabs .tabmenu.active .bi {
+    filter: invert(1);
+    opacity: 1;
+  }
+
+  .sub-tabs {
+    display: flex;
+    border-bottom: 1px solid #333;
+    flex-flow: wrap;
+  }
+
+  .sub-tabs-track {
+    width: 100%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .sub-tabs-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sub-tabs .tabmenu {
+    font-weight: 600;
+    padding: 15px 21px 10px 0;
+    border-bottom: 5px solid #efefef;
+    margin-right: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.3;
+    transition: all .3s ease;
+  }
+
+  .btn-txt {
+    white-space: nowrap;
+    padding-right: 5px;
+  }
+
+  .sub-tabs .tabcontent.active {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sub-tabs .tabmenu .bi {
+    width: 20px;
+    height: 20px;
+    opacity: .5;
+  }
+
+  .sub-tabs .tabmenu.active .bi {
+    opacity: 1;
+  }
+
+  .sub-tabs .tabmenu .bi {
+    margin-right: 5px;
+  }
+
+  .sub-tabs .tabmenu.active {
+    display: flex;
+    border-color: #00a7d1;
+    color: #222;
+  }
+
+  .content .tabcontent.active {
+    display: block;
+  }
+
+  .tabcontent-title {
+    font-weight: 800;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    color: #222;
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .article {
+    max-height: 0;
+    opacity: 0;
+    transition: all .5s ease;
+  }
+
+  .show-article .article {
+    max-height: none;
+    opacity: 1;
+  }
+
+  .article .xlines-button,
+  .search-results .xlines-button {
+    width: 100%;
+    justify-content: flex-end;
+    transform: scale3d(1, 1, 1) !important;
+    align-items: center;
+    opacity: .7;
+    cursor: pointer;
+    display: none;
+    padding: 10px 0;
+  }
+
+  .search .search-results .xlines-button {
+    display: flex;
+  }
+
+  .article .lines:after,
+  .article .lines:before,
+  .search-results .lines:after,
+  .search-results .lines:before {
+    background: #565656;
+  }
+
+  .article .lines {
+    background: none;
+  }
+
+  .xlines-button.is-active .lines:after,
+  .xlines-button.is-active .lines:before {
+    top: 0;
+    width: 30px;
+    transform-origin: 50% 50%;
+  }
+
+  .xlines-button.is-active .lines:before {
+    transform: rotate3d(0, 0, 1, 45deg);
+  }
+
+  .xlines-button.is-active .lines:after {
+    transform: rotate3d(0, 0, 1, -45deg);
+  }
+
+  .close-text {
+    display: block;
+    margin-right: 5px;
+    letter-spacing: 2px;
+    font-size: 10px;
+  }
+
+  .show-article .article .xlines-button {
+    display: flex !important;
+  }
+
+
+  .xlines-button:hover {
+    opacity: 1;
+  }
+
+  .article-list .tabcontent-title {
+    padding-left: 30px;
+  }
+
+  .article .tabcontent-title {
+    margin-bottom: 2em;
+    font-size: 2em;
+  }
+
+  .article-description p {
+    text-align: justify;
+    line-height: 1.7;
+    margin-bottom: 1.5em;
+  }
+
+  .article-list {
+    overflow: hidden;
+    transition: all .5s ease-out;
+    opacity: 1;
+    margin-left: -30px;
+    margin-right: -30px;
+  }
+
+  .show-article .article-list {
+    max-height: 0 !important;
+    opacity: 0;
+  }
+
+  .scroll-indicators {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #00a7d1;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .scroll-indicator-next,
+  .scroll-indicator-prev {
+    opacity: 0;
+  }
+
+  .scroll-indicator-next {
+    opacity: 1;
+  }
+
+  .si {
+    position: relative;
+    top: -2px;
+  }
+
+  .btn-text {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .qa-item {
+    border-bottom: 1px solid #efefef;
+    padding: 15px 30px;
+  }
+
+  .qa-item.active {
+    background: #edfaff;
+  }
+
+  .qa-question {
+    display: block;
+    font-size: 16px;
+    color: #565656;
+    padding: 2em 0 1em;
+    cursor: pointer;
+    font-weight: 500;
+    border: 0;
+    background: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+  }
+
+  .qa-question.active {
+    font-weight: 700;
+    color: #222;
+  }
+
+  .qax {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .qa-question.active .qax {
+    transform: rotate(180deg)
+  }
+
+  .qa-answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    padding-left: 25px;
+  }
+
+  .qa-answer.active {
+    max-height: auto;
+  }
+
+  .qa-answer p {
+    font-size: 14px;
+  }
+
+  .qa-link {
+    display: inline-block;
+    padding-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .loadstarted .qa-link {
+    display: none;
+  }
+
+  .chart {
+    background: rgba(255, 255, 255, 0.1);
+    justify-content: flex-start;
+    border-radius: 100px;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    display: flex;
+    height: 44px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+  }
+
+  .loadstarted .chart {
+    max-height: 44px;
+    opacity: 1;
+  }
+
+  .chart span {
+    margin-left: 5px;
+    color: #00a7d1;
+    font-weight: bolder;
+    word-break: keep-all;
+  }
+
+  .bar {
+    box-shadow: 0 10px 40px -10px #00a7d1;
+    border-radius: 100px;
+    background: #00a7d1;
+    height: 15px;
+    width: 0;
+  }
+
+  .loadstarted .bar {
+    animation: load 1s normal forwards;
+  }
+
+  @keyframes load {
+    0% {
+      width: 0;
+    }
+
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @-webkit-keyframes load {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  .tabcontent,
+  .tabsubmenu {
+    transition: all 0.5s ease-in-out;
+    display: none;
+    opacity: 0;
+    margin: 0;
+  }
+
+  .tabcontent.active,
+  .tabsubmenu.active {
+    display: block;
+    opacity: 1;
+  }
+
+  @media (min-width:575px) {
+    .main-tabs .tabmenu {
+      width: calc(50% - 15px);
+      margin-bottom: 30px;
+      min-height: 6em;
+    }
+
+    .main-tabs .bi {
+      margin-right: 15px;
+    }
+
+    .sub-tabs .tabmenu .bi {
+      margin-right: 10px;
+    }
+  }
+
+  @media (min-width:768px) {
+    .top-solutions {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      flex-wrap: wrap;
+      padding: 30px;
+    }
+
+    .top-solutions-title {
+      margin-bottom: 15px;
+      margin-right: 15px;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      width: calc(33.3333% - 15px);
+      justify-content: center;
+      border: 1px solid #00a7d1;
+    }
+
+    .top-solution {
+      width: calc(33.3333% - 15px);
+      background: #fff;
+      text-align: center;
+      margin-right: 15px;
+    }
+
+    .top-solution:nth-child(3n+3) {
+      margin-right: 0;
+    }
+
+    .tabcontent .tabcontent {
+      -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .article-list {
+      margin: 0;
+    }
+  }
+
+  @media (min-width:992px) {
+
+    .top-solutions-title {
+      font-size: 18px;
+    }
+    .top-solution-title {
+      font-size: 14px;
+    }
+
+    .top-solution:hover {
+      transform: translateY(-10px);
+    }
+
+    .main-tabs-track {
+      width: 100%;
+      overflow: visible;
+    }
+
+    .main-tabs {
+      width: 100%;
+    }
+
+    .main-tabs .tabmenu {
+      width: calc(25% - 15px);
+      margin: 10px 0;
+      padding: 30px;
+      font-size: 20px;
+    }
+
+    .main-tabs .tabmenu:hover {
+      background-color: #cfcfcf;
+    }
+
+    .main-tabs .tabmenu.active:hover {
+      background-color: #00a7d1;
+    }
+
+    .main-tabs .bi {
+      margin-right: 20px;
+      width: 30px;
+    }
+
+    .content-wrap {
+      display: flex;
+    }
+
+    .sub-tabs {
+      margin-top: 15px;
+      margin-right: 60px;
+      display: block;
+      width: 25%;
+      border-bottom: 0;
+    }
+
+    .sub-tabs .tabmenu {
+      font-size: 14px;
+      border-left: 5px solid #efefef;
+      padding: 20px 15px;
+      border-bottom: 0;
+      margin: 0;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .sub-tabs .tabmenu:hover {
+      background: #f5f5f5;
+    }
+
+    .sub-tabs .tabmenu.active {
+      background: #edfaff;
+      border-bottom-color: #efefef;
+    }
+
+    .sub-tabs-track {
+      width: 100%;
+      overflow: visible;
+    }
+
+    .sub-tabs .tabcontent {
+      width: 100%;
+    }
+
+    .sub-tabs .tabcontent.active {
+      width: 100%;
+      flex-flow: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .content-wrap .content {
+      width: 75%;
+    }
+
+    .tabcontent-title {
+      margin-bottom: 15px;
+    }
+
+    .btn-text {
+      display: inline-block;
+      white-space: normal;
+      color: #565656;
+    }
+
+    .tabcontent .tabcontent {
+      padding: 15px 0;
+    }
+
+    .scroll-indicators {
+      display: none;
+    }
+
+    .qa-question:hover {
+      transition: all .3s ease-in-out;
+      color: #000;
+    }
+  }
+
+  @media (min-width:1200px) {}
+
+  @-webkit-keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(00);
+    }
+  }
+</style>
+
+<div class="solutions-index-home">
+  <section class="search-results">
+    <div aria-label="Hide search results" onclick="closeSearchResults()" class="xlines-button x is-active">
+      <span class="close-text">HIDE SEARCH RESULTS</span>
+      <span class="lines"></span></div>
+    <h4 class="search-title">Search Results</h4>
+    <div id="search-results" class=""></div>
+  </section>
+
+  <section class="top-solutions">
+    <h4 class="top-solutions-title">Quick Links :</h4>
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014892, this)"></div>
+      <div class="img-wrap" data-value="Order & Payment"></div>
+      <h4 class="top-solution-title">Orders & Payment</h4>
     </div>
 
-    <div class="column column--xs-4 custom-block">
-      <a class="custom-block__link" href="/support/tickets/new">
-        <div class="custom-block__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 24 24" height="24" width="24">
-            <g transform="matrix(1,0,0,1,0,0)">
-                <path d="M 2.5,3.954h19c1.105,0,2,0.895,2,2v12c0,1.105-0.895,2-2,2h-19c-1.105,0-2-0.895-2-2v-12 C0.5,4.849,1.395,3.954,2.5,3.954z " stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M 22.911,4.536L12,13.454L1.089,4.536" stroke="#000000" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-          </svg>
-        </div>
-        <h3 class="custom-block__title">Submit a Request</h3>
-      </a>
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014893, this)"></div>
+      <div class="img-wrap" data-value="Shipping & Tracking"></div>
+      <h4 class="top-solution-title">Shipping & Tracking</h4>
     </div>
-  </div>
-{% endif %}
 
-{% if category_list_enabled %}
-    <ul class="row category-list clearfix" id="category-list">
-      {% for category in portal.solution_categories limit:3 %}
-        {% if category.folders_count > 0 %}
-      <li class="column column--sm-4 category-list-item ">
-            <a class="category-list-item__link" href="{{category.url}}">
-              <h2 class="h5 category-list-item__title">{{category.name}}</h2>
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-{% if recent_articles_enabled %}
-  {% if portal.recent_articles.size > 0 %}
-    <div class="recent-articles" id="recent-articles">
-      <h3 class="recent-articles__title">Recent articles</h3>
-      <ul class="row recent-articles__list">
-        {% for article in portal.recent_articles limit:6 %}
-          <li class="column column--sm-4 recent-articles-item">
-            <a class="recent-articles-item__title" href="{{article.url}}">{{article.title | h}}</a>
-            {% if article.body_plain != blank %}
-              <p class="recent-articles-item__excerpt meta">
-                {{article.body_plain | h || truncate:80}}
-              </p>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014894, this)"></div>
+      <div class="img-wrap" data-value="Returns & Exchanges"></div>
+      <h4 class="top-solution-title">Returns & Exchanges</h4>
     </div>
-  {% endif %}
-{% endif %}
 
-{% if category_tree_enabled %}
-  <div class="category-tree" id="category-tree">
-    {% for category in portal.solution_categories %}
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014895, this)"></div>
+      <div class="img-wrap" data-value="Warranty Portal"></div>
+      <h4 class="top-solution-title">Warranty Portal</h4>
+    </div>
+
+    <div class="top-solution">
+      <a class="top-solution-link" href="{{ portal.new_ticket_url }}"></a>
+      <div class="img-wrap" data-value="Mail"></div>
+      <h4 class="top-solution-title">Submit a Request</h4>
+    </div>
+  </section><!-- .top-solutions -->
+
+  <section id="solutions" class="solutions">
+    <div class="main-tabs">
+      {% for category in portal.solution_categories %}
       {% if category.folders_count > 0 %}
-        <section class="category-tree-item">
-          <h2 class="category-tree-item__title">
-            <a class="category-tree-item__title-link" href="{{category.url}}">{{category.name}}</a>
-          </h2>
-          <div class="category-tree-item__folders row clearfix">
-            {% for folder in category.folders %}
-              {% if folder.articles_count > 0 %}
-                <section class="column column--sm-6 column--md-4 folder">
-                  <h3 class="folder__title">
-                    <a class="folder__title-link" href="{{folder.url}}">{{folder.name}}</a>
-                  </h3>
-                  <ul class="articles">
-                    {% for article in folder.articles | limit: 5 %}
-                      <li class="articles__item">
-                        <a class="articles__link" href="{{article.url}}">{{article.title | h}}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                  {% if folder.articles.size > 5 %}
-                    <a href="{{folder.url}}" class="btn btn-default see-all-articles">
-                      View all ({{folder.articles_count}})
-                    </a>
-                  {% endif %}
-                </section>
-              {% endif %}
-            {% else %}
-              {{portal | filler_for_solutions}}
-            {% endfor %}
-          </div>
-        </section>
+      <button id="tab-{{ category.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ category.id }})" data-value="{{ category.name }}">{{ category.name }}</button>
       {% endif %}
-    {% endfor %}
-  </div>
-{% endif %}
+      {% endfor %}
+    </div><!-- .main-tabs -->
 
-{% if portal.has_forums and popular_posts_enabled %}
-  {% if portal.recent_popular_topics.size > 0 %}
-    <div class="popular-posts" id="popular-posts">
-      <h3 class="popular-posts__title">Popular posts</h3>
-      <ul class="row clearfix popular-posts__list">
-        {% for topic in portal.recent_popular_topics limit:6 %}
-          <li class="column column--sm-4 popular-posts-item">
-            <span class="popular-posts-item__forum">{{topic.forum.name}}</span>
-            <a class="popular-posts-item__title" href="{{topic.url}}">{{topic.title | h}}</a>
-            <p class="popular-posts-item__excerpt meta">
-              <span class="fa fa-comment-o"></span> {{topic.comment_count}}
-            </p>
-          </li>
+    <div class="content-wrap">
+      <div class="sub-tabs">
+        <div class="scroll-indicators">
+          <div class="scroll-indicator scroll-indicator-prev">
+            swipe <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"><img class="si" aria-hidden="true"
+              src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"></div>
+          <div class="scroll-indicator scroll-indicator-next">
+            <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
+        transform: rotate(90deg);"><img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
+      transform: rotate(90deg);"> swipe</div>
+        </div>
+        {% for category in portal.solution_categories %}
+        {% if category.folders_count > 0  %}
+        <div class="sub-tabs-track" onscroll="updateScrollIndicator(this)">
+          <ul data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+            {% for folder in category.folders %}
+            <li id="subtab-{{ folder.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ folder.id }}, true)" data-value="{{ folder.name }}"><span class="btn-text">{{ folder.name }}</span></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
         {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-{% endif %}
+      </div> <!-- .sub-tabs -->
 
-<section class="footer-submit-ticket">
-  <h2 class="footer-submit-ticket__title">Can't find what you're looking for?</h2>
-  <p class="footer-submit-ticket__subtitle">Let us help you!</p>
-  <p class="footer-submit-ticket__btn">
-    <a href="{{portal.new_ticket_url}}" class="btn btn-primary">
-      Submit a Ticket
-    </a>
-  </p>
-</section>
+      <div id="articles" class="content">
+        <div id="article-list" class="article-list">
+
+          {% for category in portal.solution_categories %}
+          <div data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+
+            {% if category.folders_count > 0 %}
+            {% for folder in category.folders %}
+            <div data-tab-id="tab-{{ category.id }}" data-subtab-id="subtab-{{ folder.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+              <h4 class="tabcontent-title">{{ folder.name }}</h4>
+              {% if folder.id == 11000000014893 %}
+              <div data-cms-slug="0063cc5833cc" id="pp-widget-root">&nbsp;</div>
+              <script src="https://tracking.parcelperform.com/pp-widget.js"></script>
+              {% endif %}
+              {% for article in folder.articles %}
+              <div class="qa-item">
+                <button id="a{{ article.id }}" class="qa-question" onclick="boaReadMore(this)"><img class="qax" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="30"
+                    height="30">
+                  {{article.title}}</button>
+                <div class="qa-answer">
+                  {% assign product_description = article.body_plain | split: '.' %}
+                  <p>{{ product_description.first }}.</p>
+                  <a class="qa-link" onclick="loadArticle(event, {{ article.id }}, this)" href="{{ article.url }}">Read more</a>
+
+                  <div class="chart">
+                    <div class="bar"></div>
+                    <span class="progress">0%</span>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+          {% endfor %}
+
+        </div> <!-- .article-list -->
+
+        <article class="article">
+          <div aria-label="Close article" onclick="closeArticle()" class="xlines-button x is-active">
+            <span class="close-text">CLOSE ARTICLE</span>
+            <span class="lines"></span></div>
+          <h4 id="article-title" class="tabcontent-title">{% if portal.current_page == 'article_view' %}{{ article.title }}{% endif %}</h4>
+          <div id="article-description" class="article-description">
+            {% if portal.current_page == 'article_view' %}{{ article.body }}{% endif %}
+          </div>
+        </article>
+      </div> <!-- .content -->
+    </div><!-- .content-wrap -->
+
+  </section><!-- .solutions -->
+</div>
+
+<script type="text/javascript">
+  const imap = {
+    "Customer Care & Buying Gudes": "heart",
+    "Assembly & Tutorials": "video-message",
+    "FAQ": "inquiry",
+    "COVID-19 Update": "xbox-cross",
+    "Buying Guides": "edit-property",
+    "Order & Payment": "cash-and-credit-card",
+    "Shipping & Tracking": "tracking",
+    "Returns & Exchanges": "refresh",
+    "Warranty Portal": "warranty",
+    "About": "cycling",
+    "Archive": "delivery-time",
+    "Bike Care": "bike-path",
+    "Assembly Guides": "open-end-wrench",
+    "Adjustments & Fit": "height",
+    "Owner Manuals": "user-manual",
+    "COVID-19 Response": "coronavirus",
+    "Christmas & COVID-19 Response": "coronavirus",
+    "Workshop Series": "maintenance",
+    "Mail": "request-service"
+  };
+
+  let articles = [],
+    al,
+    at,
+    ad,
+    sr,
+    solutions;
+
+  function updateNav(page_url) {
+    console.log(page_url);
+    let temp = [],
+      articleLink,
+      folderBtn,
+      categoryBtn,
+      articleWrap;
+    if (page_url.indexOf('/solutions/folders/') !== -1) {
+      temp = page_url.split('/solutions/folders/');
+      if (temp.length > 1) {
+        folderBtn = document.getElementById('subtab-' + temp[1]);
+        document.getElementById(folderBtn.parentNode.dataset.tabId).click();
+        folderBtn.click();
+      }
+    } else if (page_url.indexOf('/solutions/articles/') !== -1) {
+      temp = page_url.split('/solutions/articles/');
+      if (temp.length > 1) {
+        articleLink = document.querySelectorAll('a[href="' + page_url + '"]')[0];
+        articleWrap = articleLink.parentNode.parentNode.parentNode;
+        document.getElementById(articleWrap.dataset.tabId).click();
+        document.getElementById(articleWrap.dataset.subtabId).click();
+        articleLink.click();
+
+      }
+    } else if (page_url.indexOf('/solutions/') !== -1) {
+      temp = page_url.split('/solutions/');
+      if (temp.length > 1) {
+        document.getElementById('tab-' + temp[1]).click();
+      }
+    }
+  }
+
+  function clickTab(mainTabId, subTabId, e) {
+    //inactivate panels
+    let scs = document.querySelectorAll('.top-solution');
+
+    if (scs.length) {
+      scs.forEach(sc => {
+        sc.classList.remove('active');
+      });
+    }
+    e.classList.add('active');
+    document.getElementById('tab-' + mainTabId).click();
+    document.getElementById('subtab-' + subTabId).click();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  // accordion / read more
+  function boaReadMore(e) {
+    //close all panels
+    let qaqs = document.querySelectorAll('.qa-question');
+
+    qaqs.forEach(qaq => {
+      if (qaq.id != e.id) {
+        qaq.classList.remove('active');
+        qaq.parentNode.classList.remove("active");
+        qaq.nextElementSibling.style.maxHeight = null;
+      }
+    });
+
+    e.classList.toggle("active");
+    e.parentNode.classList.toggle("active");
+    let panel = e.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+    closeArticle();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  //tabs
+  function boaSwitchTab(tab_id, isChild = false) {
+
+    let menu_selector = isChild ? 'subtab-' : 'tab-',
+      active_menu = document.getElementById(menu_selector + tab_id),
+      tabmenus = active_menu.parentNode.querySelectorAll(".tabmenu"),
+      content,
+      active_pane;
+
+    if (tabmenus.length) {
+      tabmenus.forEach(tm => {
+        tm.className = 'tabmenu';
+      });
+    }
+    active_menu.className = 'tabmenu active';
+
+    if (isChild) {
+      active_pane = document.querySelectorAll('[data-subtab-id="' + active_menu.id + '"]');
+
+      if (active_pane.length) {
+        content = active_pane[0].parentNode.querySelectorAll(".tabcontent");
+        if (content.length) {
+          content.forEach(tc => {
+            tc.className = 'tabcontent';
+          });
+        }
+        active_pane[0].className = 'tabcontent active';
+      }
+
+      // add to google analytics
+      ga('send', 'pageview', 'https://support.bikesonline.com/support/solutions/folders/' +  tab_id );
+    } else {
+      content = document.querySelectorAll(".sub-tabs  .tabcontent, .article-list > .tabcontent");
+      if (content.length) {
+        content.forEach(tc => {
+
+          if (tc.dataset.tabId == active_menu.id) {
+
+            tc.className = 'tabcontent active';
+          } else {
+            tc.className = 'tabcontent';
+          }
+        });
+      }
+      document.getElementById('solutions').scrollIntoView({
+        behavior: 'smooth'
+      });
+      // add to google analytics
+      ga('send', 'pageview', 'https://support.bikesonline.com/support/solutions/' +  tab_id  );
+    }
+    closeArticle();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  // scroll indicators
+  function updateScrollIndicator(e) {
+    let sinext = document.querySelector('.scroll-indicator-next'),
+      siprev = document.querySelector('.scroll-indicator-prev');
+
+    if (e.offsetWidth + e.scrollLeft >= e.scrollWidth) {
+      sinext.style.opacity = 0;
+    } else {
+      sinext.style.opacity = 1;
+    }
+
+    if (e.scrollLeft == 0) {
+      siprev.style.opacity = 0;
+    } else {
+      siprev.style.opacity = 1;
+    }
+  }
+
+  function openArticle(title, description) {
+    at.innerHTML = title;
+    ad.innerHTML = description;
+    al.parentNode.classList.add('show-article');
+  }
+
+  function closeArticle() {
+    at.innerHTML = "";
+    ad.innerHTML = "";
+    al.parentNode.classList.remove('show-article');
+    var aheight = al.scrollHeight + 110;
+    al.style.maxHeight = aheight + "px";
+  }
+
+  function startProgressBar(e) {
+    // Change the variable to modify the speed of the number increasing from 0 to (ms)
+    let SPEED = 20,
+      limit = parseInt(100, 10);
+
+    e.parentNode.parentNode.classList.add('loadstarted');
+
+    for (let i = 0; i <= limit; i++) {
+      setTimeout(function() {
+        e.innerHTML = i + "%";
+      }, SPEED * i);
+    }
+  }
+
+
+
+  function loadArticle(ev, aid, e) {
+    ev.preventDefault();
+    let data;
+
+    if (typeof articles[aid] !== 'undefined') {
+      data = articles[aid];
+      openArticle(data.title, data.description);
+    } else {
+      let request = new XMLHttpRequest();
+
+
+      request.open('GET', '/api/v2/solutions/articles/' + aid, true);
+      request.setRequestHeader('Authorization', 'Basic ' + btoa('2IVc7geJIrXlFHmcMz:x'));
+      request.timeout = 10000;
+      request.onloadstart = function() {
+        startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
+      }
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          // Success!
+
+          data = JSON.parse(this.response);
+          openArticle(data.title, data.description);
+          articles[data.id] = data;
+          // add to google analytics
+          ga('send', 'pageview', e.href );
+
+        } else {
+          // We reached our target server, but it returned an error
+          closeArticle();
+
+        }
+        e.parentNode.classList.remove('loadstarted');
+      };
+
+      request.onerror = function() {
+        // There was a connection error of some sort
+        closeArticle();
+        e.parentNode.classList.remove('loadstarted');
+      };
+
+
+      request.send();
+    }
+
+  }
+
+  function openSearchResults() {
+    document.body.classList.add('search');
+    sr.style.maxHeight = (sr.scrollHeight + 110) + "px";
+  }
+
+  function closeSearchResults() {
+    document.body.classList.remove('search');
+    sr.style.maxHeight = 0;
+    sr.innerHTML = '';
+  }
+
+  function loadSearchResults(e) {
+    e.preventDefault();
+    let search = new XMLHttpRequest(),
+      searchTerms = encodeURI(document.getElementById('support-search-input').value).split(' '),
+      st = searchTerms.join('+'),
+      results = [],
+      resultsHtml = '';
+
+    st = encodeURI(st);
+
+
+    search.open('GET', '/support/search?term=' + st + '&match_matches=10', true);
+    search.setRequestHeader('Authorization', 'Basic ' + btoa('2IVc7geJIrXlFHmcMz:x'));
+    search.setRequestHeader('Accept', 'application/json');
+
+    search.timeout = 10000;
+    // search.onloadstart = function() {
+    //   startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
+    // }
+    search.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        // Success!
+        console.log(JSON.parse(this.response));
+        results = JSON.parse(this.response);
+        results.forEach(r => {
+          resultsHtml += '<li class="r-item" onclick="updateNav(\'' + r.url + '\')" ><div class="r-header"><div class="r-title">' + r.title + '</div>' +
+            '<span class="label label-small label-light">' + r.type + '</span></div>' +
+            '<div class="r-desc">' + r.desc + '</div>'
+            // + '<p class="help-text">' + '</p>'
+            +
+            '</li>';
+        });
+
+        sr.innerHTML = resultsHtml;
+        openSearchResults();
+      } else {
+        // We reached our target server, but it returned an error
+        closeSearchResults();
+
+      }
+    };
+
+    search.onerror = function() {
+      // There was a connection error of some sort
+      closeSearchResults();
+    };
+
+
+    search.send();
+  }
+
+
+  jQuery(document).ready(function() {
+    al = document.getElementById('article-list');
+    at = document.getElementById('article-title');
+    ad = document.getElementById('article-description');
+    solutions = document.getElementById('solutions');
+    sr = document.getElementById('search-results');
+
+
+    {% if portal.current_page == 'article_view' %}
+    articles[ {{ article.id }} ] = {
+      'id': {{ article.id }},
+      'title': document.getElementById('article-title').innerHTML,
+      'description': document.getElementById('article-description').innerHTML
+    }
+    {% else %}
+    closeArticle();
+    {% endif %}
+
+    updateNav(window.location.href.toString().split(window.location.host)[1]);
+    jQuery('.tabmenu').each(function() {
+      let tval = jQuery(this).attr('data-value'),
+        icon = 'bicycle';
+      if (tval && tval in imap) {
+        icon = imap[tval];
+      }
+      jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="30" height="30" alt="" />');
+    });
+
+    jQuery('.img-wrap').each(function() {
+      let tval = jQuery(this).attr('data-value'),
+        icon = 'bicycle';
+      if (tval && tval in imap) {
+        icon = imap[tval];
+      }
+      jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="50" height="50" alt="" />');
+    });
+  });
+</script>
+
+{% endif %}

@@ -1,86 +1,47 @@
-<div class="article-page">
-  <div class="row clearfix">
-    <div class="column column--sm-8">
-      <ol class="breadcrumbs">
-        <li>
-          <a href="/support/home">{{portal.name}}</a>
-        </li>
-        <li title="{% translate portal.solutions_home %}">
-          <a href="{{portal.solutions_home_url}}">{% translate portal.solutions_home %}</a>
-        </li>
-        <li title="{{article.category.name | h}}">
-          <a href="{{article.category.url}}">{{article.category.name | h}}</a>
-        </li>
-        <li title="{{article.folder.name | h}}">
-          <a href="{{article.folder.url}}">{{article.folder.name | h}}</a>
-        </li>
-      </ol>
-    </div>
-    <div class="column column--sm-4">
-      <div class="search-box search-box--small">
-        {% snippet search_form %}
-      </div>
-    </div>
-  </div>
+<section class="main content rounded-6 min-height-on-desktop fc-article-show" id="article-show-{{ article.id }}">
+	<div class="breadcrumb">
+		<a href="{{ portal.solutions_home_url }}"> {% translate portal.solutions_home %} </a>
+		<a href="{{ article.category.url }}">{{ article.category.name | h}}</a>
+		<a href="{{ article.folder.url }}">{{ article.folder.name | h}}</a>
+	</div>
+	<b class="page-stamp page-stamp-article">
+		<b class="icon-page-article"></b>
+	</b>
 
-  <div class="row clearfix">
-    <div class="column column--sm-8">
-      <article class="article clearfix" itemscope itemtype="http://schema.org/Article">
-        <header class="article-header">
-          <h1 class="article__title" itemprop="name">
-            {{article.title | h}}
-          </h1>
+	<h2 class="heading">{{ article.title | h}}
+	 	<a href="javascript:print();"
+            class="solution-print--icon print--remove"
+ 			title="{% translate portal.print_title %}"
+ 			arial-role="link"
+ 			arial-label="{% translate portal.print_title %}"
+ 		>
+			<span class="icon-print"></span>
+			<span class="text-print">{% translate print %}</span>
+ 		</a>
+	</h2>
+	{% if article.personalized_articles? %}
+	<div> {% translate portal.article.created_by %} {{ article.author }} </div>
+	{% endif %}
+	<p>{% translate portal.article.modified_on %} {{ article.modified_on | short_day_with_time }}</p>
+	<hr />
+	{% comment %}
+	<div>
+		{% for tag in article.tags %}
+			<span class="label label-info">{{tag.name | h}}</span>
+		{% endfor %}
+	</div>
+	{% endcomment %}
 
-          <div class="article-meta">
-            <div class="article-meta__col article-meta__col--main">
-              <div class="entry-info">
-                <div class="entry-info__content">
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+	<article class="article-body" id="article-body" rel="image-enlarge">
+		{{ article.body }}
+	</article>
 
-        <div class="article__body markdown" itemprop="articleBody">
-          {{article.body}}
-        </div>
+	<hr />
+		{{article | article_attachments}}
 
-        {% if article.attachments.size > 0 %}
-          <div class="article__attachments">
-            <ul class="list-unstyled attachment-list">
-              {% for attachment in article.attachments %}
-                <li class="attachment-list__item">
-                  <span class="fa fa-paperclip attachment-list__icon"></span>
-                  <a href="{{attachment.url}}" target="_blank">{{attachment.filename}}</a>
-                  <div class="meta">({{attachment.size}})</div>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      </article>
+		{{article | article_voting }}
 
-      <footer class="article-footer clearfix">
-        {{article | article_voting}}
-      </footer>
-    </div>
-    <div class="column column--sm-4">
-      <div class="article-sidebar">
-        {% if article.folder.articles_count > 1 %}
-          <div class="related-articles">
-            <h4 class="related-articles__title">Related Articles</h4>
-            <ul class="related-articles__list">
-              {% for related_article in article.folder.articles %}
-                {% unless related_article.id == article.id %}
-                  <li>
-                    <a href="{{related_article.url}}">{{related_article.title}}</a>
-                  </li>
-                {% endunless %}
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+</section>
+<section class="sidebar content rounded-6 fc-related-articles">
+	{{ article | related_articles: 10, 'related_articles' }}
+</section>

@@ -1,97 +1,1041 @@
-{% assign category_list_enabled = true %}
-{% assign category_tree_enabled = false %}
-{% assign recent_articles_enabled = true %}
+{% if portal.has_solutions %}
+<style media="screen">
+  .top-solutions {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
 
-<div class="solutions-home-page">
-  <div class="row clearfix">
-    <div class="column column--sm-8">
-      <ol class="breadcrumbs">
-        <li>
-          <a href="/support/home">{{portal.name}}</a>
-        </li>
-        <li title="{% translate portal.solutions_home %}">
-          {% translate portal.solutions_home %}
-        </li>
-      </ol>
-    </div>
-    <div class="column column--sm-4">
-      <div class="search-box search-box--small">
-        {% snippet search_form %}
-      </div>
-    </div>
-  </div>
+  .top-solution {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-align: center;
+    width: calc(50% - 8px);
+    transition: all .5s ease-in-out;
+  }
 
-  {% if category_list_enabled %}
-    <h1 class="knowledge-base-title">{% translate portal.knowledge_base %}</h1>
-    <ul class="row category-list clearfix" id="category-list">
+  .top-solution.active {
+    background: #edfaff;
+  }
+
+  .top-solution-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .top-solution:nth-child(2n+1) {
+    margin-right: 16px;
+  }
+
+  .top-solution-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #565656;
+  }
+
+  .top-solution .img-wrap {
+    margin: auto;
+    margin-bottom: 10px;
+    width: 40px;
+  }
+
+  .top-solution img {
+    filter: invert(68%) sepia(75%) saturate(5240%) hue-rotate(158deg) brightness(94%) contrast(101%);
+  }
+
+
+  .solutions-index-home {
+    width: 100%;
+  }
+
+  .main-tabs {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .tabmenu {
+    display: block;
+    background: none;
+    outline: none;
+    border: 0;
+  }
+
+  .main-tabs .tabmenu {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin: 5px 0;
+    background: #efefef;
+    width: calc(50% - 5px);
+    padding: 20px 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    font-size: 16px;
+    transition: all 0.5s ease-in-out;
+    min-height: 65px;
+    color:#565656;
+  }
+
+  .main-tabs .tabmenu:last-child {
+    margin-right: 0;
+  }
+
+  .main-tabs .bi {
+    display: block;
+    margin-right: 10px;
+    font-size: 1.6em;
+    width: 25px;
+    opacity: .5;
+  }
+
+  .main-tabs .tabmenu.active {
+    background-color: #00a7d1;
+    color: #fff;
+  }
+
+  .main-tabs .tabmenu.active .bi {
+    filter: invert(1);
+    opacity:1;
+  }
+
+  .sub-tabs {
+    display: flex;
+    border-bottom: 1px solid #333;
+    flex-flow: wrap;
+  }
+
+  .sub-tabs-track {
+    width: 100%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .sub-tabs-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sub-tabs .tabmenu {
+    font-weight: 600;
+    padding: 15px 21px 10px 0;
+    border-bottom: 5px solid #efefef;
+    margin-right: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.3;
+    transition: all .3s ease;
+  }
+
+  .btn-txt {
+    white-space: nowrap;
+    padding-right: 5px;
+  }
+
+  .sub-tabs .tabcontent.active {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sub-tabs .tabmenu .bi {
+    width: 20px;
+    height: 20px;
+    opacity: .5;
+  }
+
+  .sub-tabs .tabmenu.active .bi {
+    opacity: 1;
+  }
+
+  .sub-tabs .tabmenu .bi {
+    margin-right: 5px;
+  }
+
+  .sub-tabs .tabmenu.active {
+    display: flex;
+    border-color: #00a7d1;
+    color: #222;
+  }
+
+  .content .tabcontent.active {
+    display: block;
+  }
+
+  .tabcontent-title {
+    font-weight: 800;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    color: #222;
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .article {
+    max-height: 0;
+    opacity: 0;
+    transition: all .5s ease;
+  }
+
+  .show-article .article {
+    max-height: none;
+    opacity: 1;
+  }
+
+  .article .xlines-button {
+    width: 100%;
+    justify-content: flex-end;
+    transform: scale3d(1, 1, 1) !important;
+    align-items: center;
+    opacity: .7;
+    cursor: pointer;
+    display: none;
+    padding: 10px 0;
+  }
+
+  .article .lines:after,
+  .article .lines:before {
+    background: #565656;
+  }
+
+  .article .lines {
+    background: none;
+  }
+
+  .xlines-button.is-active .lines:after,
+  .xlines-button.is-active .lines:before {
+    top: 0;
+    width: 30px;
+    transform-origin: 50% 50%;
+  }
+
+  .xlines-button.is-active .lines:before {
+    transform: rotate3d(0, 0, 1, 45deg);
+  }
+
+  .xlines-button.is-active .lines:after {
+    transform: rotate3d(0, 0, 1, -45deg);
+  }
+
+  .close-text {
+    display: block;
+    margin-right: 5px;
+    letter-spacing: 2px;
+    font-size: 12px;
+  }
+
+  .show-article .article .xlines-button {
+    display: flex !important;
+  }
+
+
+  .xlines-button:hover {
+    opacity: 1;
+  }
+
+  .article-list .tabcontent-title {
+    padding-left: 30px;
+  }
+
+  .article .tabcontent-title {
+    margin-bottom: 2em;
+    font-size: 2em;
+  }
+
+  .article-description p {
+    text-align: justify;
+    line-height: 1.7;
+    margin-bottom: 1.5em;
+  }
+
+  .article-list {
+    overflow: hidden;
+    transition: all .5s ease-out;
+    opacity: 1;
+    margin-left: -30px;
+    margin-right: -30px;
+  }
+
+  .show-article .article-list {
+    max-height: 0 !important;
+    opacity: 0;
+  }
+
+  .scroll-indicators {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #00a7d1;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .scroll-indicator-next,
+  .scroll-indicator-prev {
+    opacity: 0;
+  }
+
+  .scroll-indicator-next {
+    opacity: 1;
+  }
+
+  .si {
+    position: relative;
+    top: -2px;
+  }
+
+  .btn-text {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .qa-item {
+    border-bottom: 1px solid #efefef;
+    padding: 15px 30px;
+  }
+
+  .qa-item.active {
+    background: #edfaff;
+  }
+
+  .qa-question {
+    display: block;
+    font-size: 16px;
+    color: #565656;
+    padding: 2em 0 1em;
+    cursor: pointer;
+    font-weight: 500;
+    border: 0;
+    background: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 0;
+  }
+
+  .qa-question.active {
+    font-weight: 700;
+    color: #222;
+  }
+
+  .qax {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .qa-question.active .qax {
+    transform: rotate(180deg)
+  }
+
+  .qa-answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    padding-left: 25px;
+  }
+
+  .qa-answer.active {
+    max-height: auto;
+  }
+
+  .qa-answer p {
+    font-size: 14px;
+  }
+
+  .qa-link {
+    display: inline-block;
+    padding-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .loadstarted .qa-link {
+    display: none;
+  }
+
+  .chart {
+    background: rgba(255, 255, 255, 0.1);
+    justify-content: flex-start;
+    border-radius: 100px;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    display: flex;
+    height: 44px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+  }
+
+  .loadstarted .chart {
+    max-height: 44px;
+    opacity: 1;
+  }
+
+  .chart span {
+    margin-left: 5px;
+    color: #00a7d1;
+    font-weight: bolder;
+    word-break: keep-all;
+  }
+
+  .bar {
+    box-shadow: 0 10px 40px -10px #00a7d1;
+    border-radius: 100px;
+    background: #00a7d1;
+    height: 15px;
+    width: 0;
+  }
+
+  .loadstarted .bar {
+    animation: load 1s normal forwards;
+  }
+
+  @keyframes load {
+    0% {
+      width: 0;
+    }
+
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @-webkit-keyframes load {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  .tabcontent,
+  .tabsubmenu {
+    transition: all 0.5s ease-in-out;
+    display: none;
+    opacity: 0;
+    margin: 0;
+  }
+
+  .tabcontent.active,
+  .tabsubmenu.active {
+    display: block;
+    opacity: 1;
+  }
+
+  @media (min-width:575px) {
+    .main-tabs .tabmenu {
+      width: calc(50% - 15px);
+    }
+
+    .main-tabs .bi {
+      margin-right: 15px;
+    }
+
+    .sub-tabs .tabmenu .bi {
+      margin-right: 10px;
+    }
+  }
+
+  @media (min-width:768px) {
+    .top-solutions {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-top: -60px;
+      flex-wrap: wrap;
+    }
+
+    .top-solution {
+      display: block;
+      width: calc(30% - 30px);
+      background: #fff;
+      padding: 30px;
+      text-align: center;
+      margin: 0 60px 60px 0;
+    }
+
+    .top-solution:nth-child(2n+1) {
+      margin-right: 60px;
+    }
+
+    .top-solution:nth-child(3n+3) {
+      margin-right: 0;
+    }
+
+
+    .tabcontent .tabcontent {
+      -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .top-solution .img-wrap {
+      margin: auto;
+      margin-bottom: 15px;
+      width: 50px;
+    }
+
+    .article-list {
+      margin: 0;
+    }
+  }
+
+  @media (min-width:992px) {
+
+    .top-solutions {
+      justify-content: space-between;
+      margin-bottom: 60px;
+    }
+
+    .top-solution:nth-child(2n+1),
+    .top-solution:nth-child(3n+3) {
+      margin-right: auto;
+    }
+
+    .top-solution {
+      width: calc(20% - 30px);
+      margin: auto;
+    }
+
+    .top-solution .img-wrap {
+      width:100px;
+    }
+    .top-solution-title {
+      font-size: 15px;
+    }
+
+
+    .top-solution:hover {
+      transform: translateY(-10px);
+    }
+
+    .img-wrap {
+      margin-bottom: 15px;
+    }
+
+    .main-tabs-track {
+      width: 100%;
+      overflow: visible;
+    }
+
+    .main-tabs {
+      width: 100%;
+    }
+
+    .main-tabs .tabmenu {
+      width: calc(25% - 15px);
+      margin: 10px 0;
+      padding: 30px;
+      font-size: 20px;
+    }
+
+    .main-tabs .tabmenu:hover {
+      background-color: #cfcfcf;
+    }
+
+    .main-tabs .tabmenu.active:hover {
+      background-color: #00a7d1;
+    }
+
+    .main-tabs .bi {
+      margin-right: 20px;
+      width:30px;
+    }
+
+    .content-wrap {
+      display: flex;
+    }
+
+    .sub-tabs {
+      margin-top: 15px;
+      margin-right: 60px;
+      display: block;
+      width: 25%;
+      border-bottom: 0;
+    }
+
+    .sub-tabs .tabmenu {
+      font-size: 14px;
+      border-left: 5px solid #fff;
+      padding: 20px 15px;
+      border-bottom: 0;
+      margin: 0;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .sub-tabs .tabmenu:hover {
+      background: #f5f5f5;
+    }
+
+    .sub-tabs .tabmenu.active {
+      background: #edfaff;
+      border-bottom-color: #efefef;
+    }
+
+    .sub-tabs-track {
+      width: 100%;
+      overflow: visible;
+    }
+
+    .sub-tabs .tabcontent {
+      width: 100%;
+    }
+
+    .sub-tabs .tabcontent.active {
+      width: 100%;
+      flex-flow: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .content-wrap .content {
+      width: 75%;
+    }
+
+    .tabcontent-title {
+      margin-bottom: 15px;
+    }
+
+    .btn-text {
+      display: inline-block;
+      white-space: normal;
+      color: #565656;
+    }
+
+    .tabcontent .tabcontent {
+      padding: 15px 0;
+    }
+
+    .scroll-indicators {
+      display: none;
+    }
+
+    .qa-question:hover {
+      transition: all .3s ease-in-out;
+      color: #000;
+    }
+  }
+
+  @media (min-width:1200px) {}
+
+  @-webkit-keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(00);
+    }
+  }
+</style>
+
+
+
+
+<div class="solutions-index-home">
+
+  <section class="top-solutions">
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014892, this)"></div>
+      <div class="img-wrap" data-value="Order & Payment"></div>
+      <h4 class="top-solution-title">Orders & Payment</h4>
+    </div>
+
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014893, this)"></div>
+      <div class="img-wrap" data-value="Shipping & Tracking"></div>
+      <h4 class="top-solution-title">Shipping & Tracking</h4>
+    </div>
+
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014894, this)"></div>
+      <div class="img-wrap" data-value="Returns & Exchanges"></div>
+      <h4 class="top-solution-title">Returns & Exchanges</h4>
+    </div>
+
+    <div class="top-solution">
+      <div class="top-solution-link" onclick="clickTab(11000000009462, 11000000014895, this)"></div>
+      <div class="img-wrap" data-value="Warranty Portal"></div>
+      <h4 class="top-solution-title">Warranty Portal</h4>
+    </div>
+
+    <div class="top-solution">
+      <a class="top-solution-link" href="{{ portal.new_ticket_url }}"></a>
+      <div class="img-wrap" data-value="Mail"></div>
+      <h4 class="top-solution-title">Submit a Request</h4>
+    </div>
+  </section><!-- .top-solutions -->
+
+  <section id="solutions" class="solutions">
+    <div class="main-tabs">
       {% for category in portal.solution_categories %}
-        {% if category.folders_count > 0 %}
-          <li class="column column--sm-4 category-list-item">
-            <a class="category-list-item__link" href="{{category.url}}">
-              <h2 class="h5 category-list-item__title">{{category.name}}</h2>
-            </a>
-          </li>
-        {% endif %}
+      {% if category.folders_count > 0 %}
+      <button id="tab-{{ category.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ category.id }})" data-value="{{ category.name }}">{{ category.name }}</button>
+      {% endif %}
       {% endfor %}
-    </ul>
-  {% endif %}
+    </div><!-- .main-tabs -->
 
-  {% if category_tree_enabled %}
-    <div class="category-tree" id="category-tree">
-      {% for category in portal.solution_categories %}
-        {% if category.folders_count > 0 %}
-          <section class="category-tree-item">
-            <h2 class="category-tree-item__title">
-              <a class="category-tree-item__title-link" href="{{category.url}}">{{category.name}}</a>
-            </h2>
-            <div class="category-tree-item__folders row clearfix">
-              {% for folder in category.folders %}
-                {% if folder.articles_count > 0 %}
-                  <section class="column column--sm-6 column--md-4 folder">
-                    <h3 class="folder__title">
-                      <a class="folder__title-link" href="{{folder.url}}">{{folder.name}}</a>
-                    </h3>
-                    <ul class="articles">
-                      {% for article in folder.articles | limit: 5 %}
-                        <li class="articles__item">
-                          <a class="articles__link" href="{{article.url}}">{{article.title | h}}</a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                    {% if folder.articles.size > 5 %}
-                      <a href="{{folder.url}}" class="btn btn-default see-all-articles">
-                        View all ({{folder.articles_count}})
-                      </a>
-                    {% endif %}
-                  </section>
-                {% endif %}
-              {% else %}
-                {{portal | filler_for_solutions}}
+    <div class="content-wrap">
+      <div class="sub-tabs">
+        <div class="scroll-indicators">
+          <div class="scroll-indicator scroll-indicator-prev">
+            swipe <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"><img class="si" aria-hidden="true"
+              src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"></div>
+          <div class="scroll-indicator scroll-indicator-next">
+            <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
+          transform: rotate(90deg);"><img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
+        transform: rotate(90deg);"> swipe</div>
+        </div>
+        {% for category in portal.solution_categories %}
+        {% if category.folders_count > 0  %}
+        <div class="sub-tabs-track" onscroll="updateScrollIndicator(this)">
+          <ul data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+            {% for folder in category.folders %}
+            <li id="subtab-{{ folder.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ folder.id }}, true)" data-value="{{ folder.name }}"><span class="btn-text">{{ folder.name }}</span></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div> <!-- .sub-tabs -->
+
+      <div id="articles" class="content">
+        <div id="article-list" class="article-list">
+
+          {% for category in portal.solution_categories %}
+          <div data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+
+            {% if category.folders_count > 0 %}
+            {% for folder in category.folders %}
+            <div data-tab-id="tab-{{ category.id }}" data-subtab-id="subtab-{{ folder.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+              <h4 class="tabcontent-title">{{ folder.name }}</h4>
+              {% if folder.id == 11000000014893 %}
+              <div data-cms-slug="0063cc5833cc" id="pp-widget-root">&nbsp;</div>
+              <script src="https://tracking.parcelperform.com/pp-widget.js"></script>
+              {% endif %}
+              {% for article in folder.articles %}
+              <div class="qa-item">
+                <button id="a{{ article.id }}" class="qa-question" onclick="boaReadMore(this)"><img class="qax" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="30" height="30">
+                  {{article.title}}</button>
+                <div class="qa-answer">
+                  {% assign product_description = article.body_plain | split: '.' %}
+                  <p>{{ product_description.first }}.</p>
+                  <a class="qa-link" onclick="loadArticle(event, {{ article.id }}, this)" href="{{ article.url }}">Read more</a>
+
+                  <div class="chart">
+                    <div class="bar"></div>
+                    <span class="progress">0%</span>
+                  </div>
+                </div>
+              </div>
               {% endfor %}
             </div>
-          </section>
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  {% if recent_articles_enabled %}
-    {% if portal.recent_articles.size > 0 %}
-      <div class="recent-articles" id="recent-articles">
-        <h3 class="recent-articles__title">Recent articles</h3>
-        <ul class="row recent-articles__list">
-          {% for article in portal.recent_articles limit:6 %}
-            <li class="column column--sm-4 recent-articles-item">
-              <a class="recent-articles-item__title" href="{{article.url}}">{{article.title | h}}</a>
-              {% if article.body_plain != blank %}
-                <p class="recent-articles-item__excerpt meta">
-                  {{article.body_plain | h || truncate:80}}
-                </p>
-              {% endif %}
-            </li>
+            {% endfor %}
+            {% endif %}
+          </div>
           {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-  {% endif %}
+
+        </div> <!-- .article-list -->
+
+        <article class="article">
+          <div aria-label="Close article" onclick="closeArticle()" class="xlines-button x is-active">
+            <span class="close-text">CLOSE ARTICLE</span>
+            <span class="lines"></span></div>
+          <h4 id="article-title" class="tabcontent-title"></h4>
+          <div id="article-description" class="article-description">
+
+          </div>
+        </article>
+      </div> <!-- .content -->
+    </div><!-- .content-wrap -->
+
+  </section><!-- .solutions -->
 </div>
+{% endif %}
+
+<script type="text/javascript">
+  const imap = {
+    "customer care & buying gudes": "heart",
+    "assembly & tutorials": "video-message",
+    "faqs": "inquiry",
+    "covid-19 update": "xbox-cross",
+    "buying guides": "edit-property",
+    "buying guides & payment": "edit-property",
+    "order & payment": "cash-and-credit-card",
+    "shipping & tracking": "tracking",
+    "returns & exchanges": "refresh",
+    "warranty portal": "warranty",
+    "about": "cycling",
+    "archive": "delivery-time",
+    "bike care": "bike-path",
+    "assembly guides & tutorials": "open-end-wrench",
+    "adjustments & fit": "height",
+    "owner manuals": "user-manual",
+    "live update": "info-popup",
+    "covid-19": "coronavirus",
+    "workshop series": "maintenance",
+    "mail": "request-service"
+  };
+
+  let articles = [],
+    al,
+    at,
+    ad,
+    solutions;
+
+
+  function clickTab(mainTabId, subTabId, e) {
+    //inactivate panels
+    let scs = document.querySelectorAll('.top-solution');
+
+    if (scs.length) {
+      scs.forEach(sc => {
+        sc.classList.remove('active');
+      });
+    }
+    e.classList.add('active');
+    document.getElementById('tab-' + mainTabId).click();
+    document.getElementById('subtab-' + subTabId).click();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  // accordion / read more
+  function boaReadMore(e) {
+    //close all panels
+    let qaqs = document.querySelectorAll('.qa-question');
+
+    qaqs.forEach(qaq => {
+      if (qaq.id != e.id) {
+        qaq.classList.remove('active');
+        qaq.parentNode.classList.remove("active");
+        qaq.nextElementSibling.style.maxHeight = null;
+      }
+    });
+
+    e.classList.toggle("active");
+    e.parentNode.classList.toggle("active");
+    let panel = e.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+    closeArticle();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  //tabs
+  function boaSwitchTab(tab_id, isChild = false) {
+
+    let menu_selector = isChild ? 'subtab-' : 'tab-',
+      active_menu = document.getElementById(menu_selector + tab_id),
+      tabmenus = active_menu.parentNode.querySelectorAll(".tabmenu"),
+      content,
+      active_pane;
+
+    if (tabmenus.length) {
+      tabmenus.forEach(tm => {
+        tm.className = 'tabmenu';
+      });
+    }
+    active_menu.className = 'tabmenu active';
+
+    if (isChild) {
+      active_pane = document.querySelectorAll('[data-subtab-id="' + active_menu.id + '"]');
+
+      if (active_pane.length) {
+        content = active_pane[0].parentNode.querySelectorAll(".tabcontent");
+        if (content.length) {
+          content.forEach(tc => {
+            tc.className = 'tabcontent';
+          });
+        }
+        active_pane[0].className = 'tabcontent active';
+      }
+    } else {
+      content = document.querySelectorAll(".sub-tabs  .tabcontent, .article-list > .tabcontent");
+      if (content.length) {
+        content.forEach(tc => {
+
+          if (tc.dataset.tabId == active_menu.id) {
+
+            tc.className = 'tabcontent active';
+          } else {
+            tc.className = 'tabcontent';
+          }
+        });
+      }
+      document.getElementById('solutions').scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+    closeArticle();
+    solutions.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  // scroll indicators
+  function updateScrollIndicator(e) {
+    let sinext = document.querySelector('.scroll-indicator-next'),
+      siprev = document.querySelector('.scroll-indicator-prev');
+
+    if (e.offsetWidth + e.scrollLeft >= e.scrollWidth) {
+      sinext.style.opacity = 0;
+    } else {
+      sinext.style.opacity = 1;
+    }
+
+    if (e.scrollLeft == 0) {
+      siprev.style.opacity = 0;
+    } else {
+      siprev.style.opacity = 1;
+    }
+  }
+
+  function openArticle(title, description) {
+    at.innerHTML = title;
+    ad.innerHTML = description;
+    al.parentNode.classList.add('show-article');
+  }
+
+  function closeArticle() {
+    at.innerHTML = "";
+    ad.innerHTML = "";
+    al.parentNode.classList.remove('show-article');
+    var aheight = al.scrollHeight + 110;
+    al.style.maxHeight = aheight + "px";
+  }
+
+  function startProgressBar(e) {
+    // Change the variable to modify the speed of the number increasing from 0 to (ms)
+    let SPEED = 20,
+      limit = parseInt(100, 10);
+
+    e.parentNode.parentNode.classList.add('loadstarted');
+
+    for (let i = 0; i <= limit; i++) {
+      setTimeout(function() {
+        e.innerHTML = i + "%";
+      }, SPEED * i);
+    }
+  }
+
+
+
+  function loadArticle(ev, aid, e) {
+    ev.preventDefault();
+    let data;
+
+    if (typeof articles[aid] !== 'undefined') {
+      data = articles[aid];
+      openArticle(data.title, data.description);
+    } else {
+      let request = new XMLHttpRequest();
+
+
+      request.open('GET', 'https://bikesonlinesandbox.freshdesk.com/api/v2/solutions/articles/' + aid, true);
+      request.setRequestHeader('Authorization', 'Basic ' + btoa('2IVc7geJIrXlFHmcMz:x'));
+      request.timeout = 10000;
+      request.onloadstart = function() {
+        startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
+      }
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          // Success!
+          data = JSON.parse(this.response);
+          openArticle(data.title, data.description);
+          articles[data.id] = data;
+
+          e.parentNode.classList.remove('loadstarted');
+        } else {
+          // We reached our target server, but it returned an error
+
+        }
+      };
+
+      request.onerror = function() {
+        // There was a connection error of some sort
+      };
+
+
+      request.send();
+    }
+
+  }
+
+
+
+
+  jQuery(document).ready(function() {
+    al = document.getElementById('article-list');
+    at = document.getElementById('article-title');
+    ad = document.getElementById('article-description');
+    solutions = document.getElementById('solutions');
+    closeArticle();
+    jQuery('.tabmenu').each(function() {
+      let tval = jQuery(this).attr('data-value'),
+        icon = 'bicycle';
+      if (tval && tval in imap) {
+        icon = imap[tval];
+      }
+      jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="30" height="30" alt="" />');
+    });
+
+    jQuery('.img-wrap').each(function() {
+      let tval = jQuery(this).attr('data-value'),
+        icon = 'bicycle';
+      if (tval && tval in imap) {
+        icon = imap[tval];
+      }
+      jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="50" height="50" alt="" />');
+    });
+  });
+</script>

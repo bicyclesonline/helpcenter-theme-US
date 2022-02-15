@@ -1,12 +1,40 @@
-<div class="new-ticket-page">
-  <div class="row clearfix">
-    <div class="column column--sm-8 ">
-      <h1 class="new-ticket-title">{% translate ticket.submit_ticket_title %}</h1>
+<style media="screen">
+	.form_address {
+		padding-left: 30px;
+		float: right;
+		width: 33%;
+		padding-top: 30px;
+	}
 
-      <div class="new-ticket-form">
-        {% snippet new_ticket_form %}
-      </div>
-    </div>
-    <div class="column column--sm-4 " id="new-ticket-search"></div>
-  </div>
+	.address-title {
+		font-size: 17px;
+		margin-bottom: 15px;
+	}
+
+	.address-content {
+		font-size: 14px;
+	}
+
+	.form-portal .form-actions {
+		padding-left: 0;
+		display: flex;
+		justify-content: space-around;
+	}
+
+	input[type="submit"].btn.btn-primary,
+	.btn {
+		width: calc(50% - 30px);
+	}
+</style>
+<section class="content main rounded-6 fc-new-ticket">
+	<h3 class="heading">{% translate ticket.submit_ticket_title %}</h3>
+	{% snippet new_ticket_form %}
+</section>
+
+<div class="form_address">
+	<h4 class="address-title"><strong>Bikes Online</strong></h4>
+	<p class="address-content">2711 West Loker Ave, Carlsbad 92010, California, USA<br>
+		(650) 272-3778 Monday - Friday 9:00am - 5pm PST<br>
+		<!-- <strong>For media enquiries, please contact media@bicyclesonline.com.au</strong> -->
+  </p>
 </div>

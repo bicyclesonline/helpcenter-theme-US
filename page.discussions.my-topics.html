@@ -1,53 +1,32 @@
-<div class="my-topics-page">
-  <h1 class="knowledge-base-title">{% translate portal.community_forums %}</h1>
+<section class="content rounded-6 min-height-on-desktop fc-my-topics" id="forum-my-topics">
+	<b class="pull-right">{{ portal | link_to_start_topic }}</b>
+	<div class="breadcrumb">
+			<a href="{{ portal.discussions_home_url }}">{% translate portal_pages.groups.discussions %}</a>
+	</div>
 
-  <ul class="discussions-menu">
-    <li class="discussions-menu__item">
-      <a href="/discussions/topics">Discussions</a>
-    </li>
-    <li class="discussions-menu__item is-active">
-      {% translate portal.my_topics %}
-    </li>
-  </ul>
-
-  <p>{% translate portal.showing_my_topics %}</p>
-
-  {% if portal.my_topics.size > 0 %}
-    {% paginate portal.my_topics by 10 %}
-      <ul class="forum-topics" id="forum-topic-list">
-        {% for topic in paginate.collection %}
-          <li class="forum-topics__item {% if topic.sticky? %} forum-topics__item--sticky {% endif %}">
-  <a class="forum-topics__link" title="{{topic.title | h}}" href="{{topic.url}}">
-    {% if topic.sticky? %}
-      <i class="fa fa-thumb-tack forum-topics__pin" aria-hidden="true"></i>
-    {% endif %}
-    {{topic.title | h}}
-  </a>
-
-  <div class="forum-topics__labels">
-    {{ topic | topic_labels }}
-  </div>
-
-  <div class="forum-topics__author">
-    {{ topic.user | profile_image }}
-  </div>
-
-  <div class="forum-topics__comments">
-    <i class="fa fa-comment-o forum-topics__comments-icon" aria-hidden="true"></i> {{topic.comment_count}}
-  </div>
-
-  <div class="forum-topics__date">
-    <span class="meta">{{topic.created_on | short_day_with_time}}</span>
-  </div>
-</li>
-
-        {% else %}
-          <p>{% translate portal.no_topics_in_this_view %}</p>
-        {% endfor %}
-      </ul>
-      {{paginate | default_pagination}}
-    {% endpaginate %}
-  {% else %}
-    <p>{% translate portal.no_topics_in_this_view %}</p>
-  {% endif %}
-</div>
+	<div class="list-lead">
+		{% translate portal.my_topics %} <span class="item-count">{{ portal.my_topics_count }}</span>
+	</div>
+	<p class="intro ellipsis" title="{% translate portal.showing_my_topics %}">
+		{% translate portal.showing_my_topics %}
+	</p>
+	{% paginate portal.my_topics by 10 %}
+		<div class="c-list topic-list" id="forum-topic-list">
+			{% for topic in paginate.collection %}
+				<div class="c-row c-user-thumb {% if topic.sticky? %} c-topic-sticky {% endif %}">
+					{{ topic.user | profile_image }}
+					{{ topic | topic_labels }}
+					<div class="ellipsis">
+						<a class="c-link" title="{{topic.title | h}}" href="{{topic.url}}">{{topic.title | h}}</a>
+					</div>
+					<div class="help-text">
+						{{ topic | topic_info_with_votes }}
+					</div>
+				</div>
+			{% else %}
+				<p class="lead">{% translate portal.no_topics_in_this_view %}</p>
+			{% endfor %}
+		</div>
+		{{ paginate | default_pagination }}
+	{% endpaginate %}
+</section>

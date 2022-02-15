@@ -1,47 +1,73 @@
-<div class="folder-page">
-  <div class="row clearfix">
-    <div class="column column--sm-8">
-      <ol class="breadcrumbs">
-        <li>
-          <a href="/support/home">{{portal.name}}</a>
-        </li>
-        <li title="{% translate portal.solutions_home %}">
-          <a href="{{portal.solutions_home_url}}">{% translate portal.solutions_home %}</a>
-        </li>
-        <li title="{{folder.category.name | h}}">
-          <a href="{{folder.category.url}}">{{folder.category.name | h}}</a>
-        </li>
-      </ol>
-    </div>
-    <div class="column column--sm-4">
-      <div class="search-box search-box--small">
-        {% snippet search_form %}
-      </div>
-    </div>
-  </div>
-
-  <div class="header">
-    <h1 class="h2 folder-title">
-      {{folder.name | h}}
-    </h1>
-
-    {% if folder.description %}
-      <p class="page-description">{{folder.description | h}}</p>
-    {% endif %}
-  </div>
-
-  {% if folder.articles_count > 0 %}
-    {% paginate folder.articles by 10 %}
-      <ul class="articles">
-        {% for article in paginate.collection %}
-          <li class="articles__item">
-            <a class="articles__link" href="{{article.url}}">{{article.title | h}}</a>
-          </li>
-        {% endfor %}
-      </ul>
-      {{paginate | default_pagination}}
-    {% endpaginate %}
-  {% else %}
-    {{folder | h | filler_for_folders}}
-  {% endif %}
-</div>
+<style>
+ .container .content .heading {
+    font-size: 33px;
+    font-weight: 800;
+    text-align: center;
+    margin: 30px 0 60px;
+}
+.c-article-row .article-title a {
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: block;
+    color: #565656;
+    font-weight: 600;
+}
+.c-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.c-article-row {
+    display: flex;
+    padding: 30px 15px;
+    margin-bottom: 30px;
+    border: 0;
+    box-shadow: 0 0 30px rgb(0 0 0 / 10%);
+    width: calc(50% - 15px);
+}
+  .c-article-row:nth-child(2n+1){
+    margin-right:30px;
+  }
+.c-article-row .icon-article-table-row {
+    box-shadow: none;
+    float: none;
+    width: 94px;
+        position: relative;
+    top: -22px;
+}
+  .c-row .help-text {
+    font-style: italic;
+    margin-top: 15px;
+    opacity: .7;
+}
+</style>
+<section class="content rounded-6  fc-folder-show" id="folder-show-{{folder.id}}">
+	<div class="breadcrumb">
+		<a href="{{ portal.solutions_home_url }}"> {% translate portal.solutions_home %} </a>
+		<a href="{{ folder.category.url }}">{{ folder.category.name | h}}</a>
+	</div>
+	<h2 class="heading">{{ folder.name | h }}</h2>
+	<p class="info-text">{{ folder.description | h}}</p>
+	{% if folder.articles_count > 0 %}
+		{% paginate folder.articles by 10 %}
+			<section class="article-list c-list">
+				{% for article in paginate.collection %}
+					<div class="c-row c-article-row">
+						<i class="icon-article-table-row"></i>
+                      	<div class="c-text-wrap" >
+						<div class="ellipsis article-title">
+							<a href="{{ article.url }}" class="c-link">{{ article.title | h }}</a>
+						</div>
+						<div class="description-text">
+							{{  article.body_plain | h | truncate:160 }}
+						</div>
+						<div class="help-text">{{ article.modified_on | short_day_with_time }}</div>
+                      </div>
+					</div>
+				{% endfor %}
+			</section>
+			{{ paginate | default_pagination }}
+		{% endpaginate %}
+	{% else %}
+		{{ folder| h | filler_for_folders }}
+	{% endif %}
+</section>
