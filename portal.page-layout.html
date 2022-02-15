@@ -1,0 +1,301 @@
+<div class="mob-overlay slide-menu__control" data-target="test-menu-left" data-action="toggle"></div>
+<div class="mob-overlay-filter"></div>
+
+<!-- Notification Messages -->
+{{page_message}}
+<div class="layout {% if portal.user.id %}layout--logged-in{% else %}layout--anonymous{% endif %}">
+  <div class="layout__header">
+
+    {{header}}
+
+    <div class="bo-custom">
+      <header class="topbar" data-topbar>
+        <div class="container">
+          <div class="topbar__inner">
+            <div class="topbar__col clearfix">
+              <p class="help-center-name"><a href="{{portal.linkback_url}}">Help Center</a></p>
+              <button type="button" role="button" aria-label="Toggle Navigation" class="lines-button x" data-toggle-menu>
+                <span class="lines"></span></button>
+            </div>
+            <div class="topbar__col topbar__menu">
+              <div class="topbar__collapse" data-menu>
+                <div class="topbar__controls {% if portal.user.id %}topbar__controls--logged-in{% else %}topbar__controls--anonymous{% endif %}">
+                  {% unless portal.user.is_agent %}
+                    <a class="btn btn-topbar" href="{{portal.new_ticket_url}}">Submit a ticket</a>
+                    <a class="btn btn-topbar" href="/support/tickets">My Tickets</a>
+                  {% endunless %}
+                  {{portal | welcome_navigation}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- Search and page links for the page -->
+    {% if portal.current_tab %}
+      {% if portal.current_page == 'portal_home' or portal.current_page == 'search' %}
+        <section class="hero-unit" data-hero-unit>
+          <div class="hero-bg" data-hero-bg style="background-image: url(https://breezythemes.s3-us-west-2.amazonaws.com/bicyclesonline/hero-image3.jpg);"></div>
+          <div class="container-inner search-box search-box--hero-unit" data-search-box>
+            <div class="intro-title">{% translate header.help_center %}</div>
+            {% snippet search_form %}
+          </div>
+        </section>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="layout__content">
+    <div class="container">
+      <div class="container-inner clearfix">
+        {% if portal.current_page == 'profile_edit' %}
+        <div id="profile-edit">
+          {% endif %}
+
+          {{content_for_layout}}
+
+          {% if portal.current_page == 'profile_edit' %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="layout__footer">
+    {{footer}}
+  </div>
+</div>
+<script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="https://preeziecdn.azureedge.net/production/preguide.min.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    PREEZIE_GUIDE.render([
+				{
+					guideKey: 'PRE-f501d398-7765-43a4-0c65-08d9ecf9c3a3',
+					version: '1.0.0',
+					renderTo: 'preezie-widget-div-id'
+				}
+			]);
+});
+</script>
+
+<script>
+  (function($) {
+    function clipper(min, max) {
+      return function(o) {
+        if (o > max) return max;
+        if (o < min) return min;
+        return o;
+      };
+    }
+
+    var BT_SETTINGS = {
+      css: {
+        activeClass: 'is-active',
+        hiddenClass: 'is-hidden'
+      }
+    };
+
+    var opacityClipper = clipper(0, 1);
+    var $window = $(window);
+    var $heroUnit = $('[data-hero-unit]');
+    var $topbar = $('[data-topbar]');
+    var topbarHeight = parseInt($topbar.height());
+    var $scrollToTop = $('[data-scroll-to-top]');
+    var $heroUnitBg;
+    var $searchBox;
+
+    if ($heroUnit.length) {
+      $heroUnitBg = $heroUnit.find('[data-hero-bg]');
+      $searchBox = $heroUnit.find('[data-search-box]');
+    }
+
+    $scrollToTop.click(function() {
+      $('html, body').animate({scrollTop: 0}, 1000);
+      return false;
+    });
+
+    $("[data-link]").click(function() {
+        window.location.href = $(this).attr("data-link");
+        return false;
+	});
+
+    var bindEffects = function() {
+      var scrolled = $window.scrollTop();
+      if (scrolled > topbarHeight) {
+        $scrollToTop.addClass(BT_SETTINGS.css.activeClass);
+      }
+      else {
+        $scrollToTop.removeClass(BT_SETTINGS.css.activeClass);
+      }
+
+      if ($heroUnit.length) {
+        $heroUnitBg.css({
+          '-moz-transform': 'translate3d(0px,' + scrolled / -3 + 'px' + ', 0px)',
+          '-webkit-transform': 'translate3d(0px,' + scrolled / -3 + 'px' + ', 0px)',
+          'transform': 'translate3d(0px,' + scrolled / -3 + 'px' + ', 0px)'
+        });
+
+        $searchBox.css({
+          'opacity': opacityClipper(1 - opacityClipper(scrolled * 0.003))
+        });
+      }
+    };
+
+    $window.on('scroll.theme', bindEffects);
+
+    $('[data-toggle-menu]').click(function() {
+      $(this).toggleClass(BT_SETTINGS.css.activeClass);
+      $('[data-menu]').toggle();
+    });
+
+    $('.image-with-lightbox').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      closeBtnInside: false,
+      fixedContentPos: true,
+      mainClass: 'mfp-with-zoom', // class to remove default margin from left and right side
+      image: {
+        verticalFit: true
+      },
+      zoom: {
+        enabled: true,
+        duration: 300 // don't foget to change the duration also in CSS
+      }
+    });
+
+    $('.image-with-video-icon').magnificPopup({
+      disableOn: 700,
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false
+    });
+
+    $('.accordion__item-title').on('click', function() {
+      var $title = $(this);
+      $title.toggleClass('accordion__item-title--active');
+      $title
+        .parents('.accordion__item')
+        .find('.accordion__item-content')
+        .slideToggle();
+    });
+
+    $('.tabs-link').click(function(e) {
+      e.preventDefault();
+      var $link = $(this);
+      var tabIndex = $link.index();
+      var $tab = $link.parents('.tabs').find('.tab').eq(tabIndex);
+      $link
+        .addClass(BT_SETTINGS.css.activeClass)
+        .siblings()
+        .removeClass(BT_SETTINGS.css.activeClass);
+      $tab
+        .removeClass(BT_SETTINGS.css.hiddenClass)
+        .siblings('.tab')
+        .addClass(BT_SETTINGS.css.hiddenClass);
+    });
+
+    $('.fa-spin').empty();
+ if(jQuery(location).attr("pathname") !=='/support/tickets/new'){
+    function initFreshChat() {
+  window.fcWidget.init({
+    token: "b2b0ad38-149b-48a5-94ca-707a37d94551",
+    host: "https://wchat.freshchat.com",
+    siteId: "bicyclesonline",
+tags: ["USA"],
+    faqTags : {
+        tags : ['USA'],
+        filterType:'category'
+    },
+    config: {
+      showFAQOnOpen: true,
+      hideFAQ: false,
+      content: {
+        headers: {
+          chat: 'Live Chat - Message us'
+          }
+        }
+    }
+  });
+	 }
+
+  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+$(document).ready(function(){
+document.getElementById($id_custom_button).style.visibility = 'visible';
+});
+}
+  //Header from the main website (mobile)
+	function onReady() {
+		new SlideMenu(document.getElementById('test-menu-left'), {
+			position: 'left',
+			submenuLinkAfter: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
+			backLinkBefore: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
+		});
+	}
+	if (document.readyState !== "loading") {
+		onReady(); // Or setTimeout(onReady, 0); if you want it consistently async
+	} else {
+		document.addEventListener("DOMContentLoaded", onReady);
+	}
+  function openFilters() {
+    $('body').addClass('noscroll');
+    $(".mob-overlay-filter").show();
+    $("#left-sidebar").width('320');
+      $("#test-menu-left").css('transform','translateX(0)');
+  }
+  function closeFilters() {
+    $(".mob-overlay-filter").hide();
+    $("body").removeClass("noscroll");
+    $("#left-sidebar").width('0');
+  }
+  $(document).ready(function() {
+    $(".mob-overlay-filter").click(function() {
+        $(".mob-overlay-filter").hide();
+        $("body").removeClass("noscroll");
+        $("#left-sidebar").width('0');
+    });
+    $(".slide-menu__control").click(function() {
+        $('body').addClass('noscroll');
+        $(".mob-overlay").show();
+    });
+    $(".mob-overlay").click(function() {
+        $(".mob-overlay").hide();
+        $("body").removeClass("noscroll");
+    });
+  });
+})(jQuery);
+    jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').on('change', function() {
+
+              if(this.value == 'Sales' || this.value == 'Other'){
+
+                 jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required',false);
+                jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
+
+
+               }else{
+                 jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required',true);
+              jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').addClass("required");
+
+        }
+      if(jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').val() == 'General Questions' || jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').val() == 'Technical Support' ){
+        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
+        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required',false);
+      }else{
+       jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required',true);
+        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').addClass("required");
+      }
+       if(this.value == 'Sales' || this.value == 'All Other Enquiries'){
+
+                   jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required',false);
+                jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
+
+
+    }
+});
+</script>
+
+<script type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=MxKJVQ" async ></script>
