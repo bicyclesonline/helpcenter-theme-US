@@ -1,42 +1,98 @@
-<!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WPXC9B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript
+  ><iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-WPXC9B"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe
+></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div class="bo-custom">
+  <style>
+    .banner-flag {
+      width: 21px;
+    }
+  </style>
   <div class="wrapper-header">
     <div class="container">
       <div class="masthead-wrap">
-
-        <div class=" wrapper-logo">
+        <div class="wrapper-logo">
           <a href="https://www.bikesonline.com/" title="Bikes Online">
-            <img class="logo" src="https://www.bikesonline.com/assets/website_logo.png" alt="Bikes Online" data-gtm-vis-recent-on-screen-406104_142="1400" data-gtm-vis-first-on-screen-406104_142="1400"
-              data-gtm-vis-total-visible-time-406104_142="500" data-gtm-vis-has-fired-406104_142="1">
+            <img
+              class="logo"
+              src="{{portal.logo_url}}"
+              alt="Bikes Online"
+              data-gtm-vis-recent-on-screen-406104_142="1400"
+              data-gtm-vis-first-on-screen-406104_142="1400"
+              data-gtm-vis-total-visible-time-406104_142="500"
+              data-gtm-vis-has-fired-406104_142="1"
+            />
           </a>
 
-          <a class="logo-help-text" href="{{ portal.linkback_url }}" title="Bikes Online Help Center" title="Bikes Online Help Center">Help <br>Center</a>
+          <a
+            class="logo-help-text"
+            href="{{ portal.linkback_url }}"
+            title="Bikes Online Help Center"
+            title="Bikes Online Help Center"
+            >Help
+            <img
+              class="banner-flag"
+              src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/review-flag-us.png"
+            /><br />Center</a
+          >
         </div>
 
-
         <ul class="top-links">
-          <li><a class="top-link" href="https://www.bikesonline.com/">Back to store</a></li>
+          <li>
+            <a class="top-link" href="https://www.bikesonline.com/"
+              >Back to store</a
+            >
+          </li>
           {% unless portal.user.is_agent %}
           <li><a class="top-link" href="/support/tickets/">My Tickets</a></li>
           <ul class="submenu">
-            <li><a href="{{ portal.new_ticket_url }}">Submit a Ticket</a>
-            </li>
+            <li><a href="{{ portal.new_ticket_url }}">Submit a Ticket</a></li>
           </ul>
           {% endunless %}
           <li>
             {% if portal.user %}
 
-            <span class="top-link"><img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-user-50.svg" class="bi" width="20" height="20" alt=""> My Account <img class="bi bi-expand" aria-hidden="true"
-                src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="15" height="15"></span>
+            <span class="top-link"
+              ><img
+                aria-hidden="true"
+                src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-user-50.svg"
+                class="bi"
+                width="20"
+                height="20"
+                alt="" />
+              My Account
+              <img
+                class="bi bi-expand"
+                aria-hidden="true"
+                src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                alt=""
+                width="15"
+                height="15"
+            /></span>
             <ul class="submenu">
-              <li><a href="{{ portal.profile_url }}">Edit profile</a>
-              </li>
+              <li><a href="{{ portal.profile_url }}">Edit profile</a></li>
               <li><a href="{{ portal.logout_url }}">Sign out</a></li>
             </ul>
 
             {% else %}
 
-            <a class="top-link login" href="{{ portal.login_url }}"><img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-user-50.svg" class="bi" width="20" height="20" alt=""> Log in</a>
+            <a class="top-link login" href="{{ portal.login_url }}"
+              ><img
+                aria-hidden="true"
+                src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-user-50.svg"
+                class="bi"
+                width="20"
+                height="20"
+                alt=""
+              />
+              Log in</a
+            >
             <ul class="submenu">
               <li><a href="{{ portal.signup_url }}">Sign up</a></li>
             </ul>
@@ -44,59 +100,92 @@
             {% endif %}
           </li>
         </ul>
-
       </div>
     </div>
   </div>
-
 </div>
-
-
 
 <div class="bo-custom">
   <header class="topbar" data-topbar>
-
     <div class="container">
       <div class="topbar__inner">
         <div class="topbar__col clearfix">
-
-          <button type="button" role="button" aria-label="Toggle Navigation" class="lines-button x" data-toggle-menu>
-            <span class="lines"></span></button>
+          <button
+            type="button"
+            role="button"
+            aria-label="Toggle Navigation"
+            class="lines-button x"
+            data-toggle-menu
+          >
+            <span class="lines"></span>
+          </button>
         </div>
         <div class="topbar__col topbar__menu">
           <div class="topbar__collapse" data-menu>
-
-        <ul class="topbar__controls visible-xs">
-          <li><a class="topbar-link" href="https://www.bikesonline.com/">Back to store</a></li>
-          {% unless portal.user.is_agent %}
-          <li><a class="topbar-link" href="/support/tickets/">My Tickets</a></li>
-          <li><a class="topbar-link" href="{{ portal.new_ticket_url }}">Submit a Ticket</a></li>
-          {% endunless %}
-          {% if portal.user %}
-          <li><a class="topbar-link" href="{{ portal.logout_url }}">Sign out</a></li>
-          <li><a class="topbar-link" href="{{ portal.profile_url }}">My Profile</a></li>
-          {% else %}
-          <li><a class="topbar-link" href="{{ portal.login_url }}">Log in</a></li>
-          <li><a class="topbar-link" href="{{ portal.signup_url }}">Sign up</a></li>
-          {% endif %}
-
-          {% unless portal.current_page == "portal_home"  or portal.current_page contains "solution" or portal.current_page contains "article" %}
-
-
-              {% for category in portal.solution_categories limit: 3 %}
+            <ul class="topbar__controls">
+              <li class="visible-xs">
+                <a class="topbar-link" href="https://www.bikesonline.com/"
+                  >Back to store</a
+                >
+              </li>
+              {% unless portal.user.is_agent %}
+              <li class="visible-xs">
+                <a class="topbar-link" href="/support/tickets/">My Tickets</a>
+              </li>
+              <li class="visible-xs">
+                <a class="topbar-link" href="{{ portal.new_ticket_url }}"
+                  >Submit a Ticket</a
+                >
+              </li>
+              {% endunless %} {% if portal.user %}
+              <li class="visible-xs">
+                <a class="topbar-link" href="{{ portal.logout_url }}"
+                  >Sign out</a
+                >
+              </li>
+              <li class="visible-xs">
+                <a class="topbar-link" href="{{ portal.profile_url }}"
+                  >My Profile</a
+                >
+              </li>
+              {% else %}
+              <li class="visible-xs">
+                <a class="topbar-link" href="{{ portal.login_url }}">Log in</a>
+              </li>
+              <li class="visible-xs">
+                <a class="topbar-link" href="{{ portal.signup_url }}"
+                  >Sign up</a
+                >
+              </li>
+              {% endif %} {% unless portal.current_page == "portal_home" or
+              portal.current_page contains "solution" or portal.current_page
+              contains "article" %} {% for category in
+              portal.solution_categories limit: 3 %}
               <li>
-                <a class="topbar-link" href="{{ category.url }}">{{ category.name }}{% if category.folders_count > 0 %} <img class="bi bi-expand bi-invert" aria-hidden="true"
-                    src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="15" height="15">{% endif %}</a>
+                <a class="topbar-link" href="{{ category.url }}"
+                  >{{ category.name }}{% if category.folders_count > 0 %}
+                  <img
+                    class="bi bi-expand bi-invert"
+                    aria-hidden="true"
+                    src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                    alt=""
+                    width="15"
+                    height="15"
+                  />{% endif %}</a
+                >
                 {% if category.folders_count > 0 %}
                 <ul class="submenu">
                   {% for folder in category.folders %}
-                  <li><a class="topbar-link" href="{{ folder.url }}">{{ folder.name }}</a></li>
+                  <li>
+                    <a class="topbar-link" href="{{ folder.url }}"
+                      >{{ folder.name }}</a
+                    >
+                  </li>
                   {% endfor %}
                 </ul>
                 {% endif %}
               </li>
-              {% endfor %}
-              {% endunless %}
+              {% endfor %} {% endunless %}
             </ul>
 
             <!-- <ul class="topbar__controls">
@@ -105,34 +194,64 @@
               <li><a class="topbar-link" href="/support/solutions/folders/11000000014894">Returns</a></li>
               <li><a class="topbar-link" href="/support/solutions/folders/11000000014895">Warranty</a></li>
             </ul> -->
-
           </div>
         </div>
       </div>
-
     </div>
-
   </header>
 
   <!-- Search and page links for the page -->
   {% if portal.current_tab %}
 
   <section class="hero-unit" data-hero-unit>
-
-    <div class="container-inner search-box search-box--hero-unit" data-search-box>
+    <div
+      class="container-inner search-box search-box--hero-unit"
+      data-search-box
+    >
       <div class="intro-title">
         <div class="h1">Help Center</div>
         <div class="hero-text">{% translate header.help_center %}</div>
       </div>
 
-      <form class="hc-search-form print--remove" onsubmit="loadSearchResults(event)" autocomplete="off" action="/support/search" id="hc-search-form" data-csrf-ignore="true">
+      <form
+        class="hc-search-form print--remove"
+        onsubmit="loadSearchResults(event)"
+        autocomplete="off"
+        action="/support/search"
+        id="hc-search-form"
+        data-csrf-ignore="true"
+      >
         <div class="hc-search-input">
-          <label for="support-search-input" class="hide">Search for a solution</label>
-          <input placeholder="Search for a solution" type="text" name="term" class="special ui-autocomplete-input" value="" rel="page-search" data-max-matches="10" id="support-search-input" autocomplete="off">
+          <label for="support-search-input" class="hide"
+            >Search for a solution</label
+          >
+          <input
+            placeholder="Search for a solution"
+            type="text"
+            name="term"
+            class="special ui-autocomplete-input"
+            value=""
+            rel="page-search"
+            data-max-matches="10"
+            id="support-search-input"
+            autocomplete="off"
+          />
         </div>
         <div class="hc-search-button">
-          <button class="btn btn-primary" aria-label="Search" type="submit" autocomplete="off">
-            <img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-search-50.svg" class="bi bi-invert" width="35" height="35" alt="Search for a solution">
+          <button
+            class="btn btn-primary"
+            aria-label="Search"
+            type="submit"
+            autocomplete="off"
+          >
+            <img
+              aria-hidden="true"
+              src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-search-50.svg"
+              class="bi bi-invert"
+              width="35"
+              height="35"
+              alt="Search for a solution"
+            />
           </button>
         </div>
       </form>

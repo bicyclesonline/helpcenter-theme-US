@@ -1,22 +1,29 @@
-<div class="mob-overlay slide-menu__control" data-target="test-menu-left" data-action="toggle"></div>
+<div style="display: none">{{ portal.current_page }}</div>
+<div
+  class="mob-overlay slide-menu__control"
+  data-target="test-menu-left"
+  data-action="toggle"
+></div>
 <div class="mob-overlay-filter"></div>
 
 <!-- Notification Messages -->
 {{page_message}}
-<div class="layout {% if portal.user.id %}layout--logged-in{% else %}layout--anonymous{% endif %}">
+<div
+  class="layout {% if portal.user.id %}layout--logged-in{% else %}layout--anonymous{% endif %}"
+>
   <div class="layout__header">
-
     {{header}}
-
 
     <div class="layout__content">
       <div class="container">
         <div class="container-inner clearfix">
-
-          {% if portal.current_page == "portal_home"  or portal.current_page contains "solution" or portal.current_page contains "article" %}
-
-          {% if portal.has_solutions %}
+          {% if portal.current_page == "portal_home" or portal.current_page
+          contains "solution" or portal.current_page contains "article" %} {% if
+          portal.has_solutions %}
           <style media="screen">
+            input#search-table-name {
+              height: 21px;
+            }
             .search-results {
               box-shadow: 0 0 30px rgb(0 0 0 / 20%);
               background: #fff;
@@ -26,7 +33,7 @@
               position: relative;
               margin-top: -60px;
               opacity: 0;
-              transition: all .5s ease-in-out;
+              transition: all 0.5s ease-in-out;
               display: none;
             }
 
@@ -35,12 +42,11 @@
               display: block;
             }
 
-
             #search-results {
               overflow: hidden;
               max-height: 0;
               margin: auto;
-              transition: all .5s ease-in-out;
+              transition: all 0.5s ease-in-out;
             }
 
             .search #search-results {
@@ -86,11 +92,9 @@
               background-color: #bbe6f7;
             }
 
-
-
             .top-solutions {
               overflow: hidden;
-              transition: all .5s ease-in-out;
+              transition: all 0.5s ease-in-out;
               padding: 30px;
               margin: -30px -15px 0;
             }
@@ -113,12 +117,12 @@
             .top-solution {
               position: relative;
               background: #fff;
-              box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+              box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
               padding: 15px;
               margin-bottom: 15px;
               cursor: pointer;
               text-align: center;
-              transition: all .5s ease-in-out;
+              transition: all 0.5s ease-in-out;
             }
 
             .top-solution.active {
@@ -152,9 +156,9 @@
             }
 
             .top-solution img {
-              filter: invert(68%) sepia(75%) saturate(5240%) hue-rotate(158deg) brightness(94%) contrast(101%);
+              filter: invert(68%) sepia(75%) saturate(5240%) hue-rotate(158deg)
+                brightness(94%) contrast(101%);
             }
-
 
             .solutions-index-home {
               width: 100%;
@@ -199,7 +203,7 @@
               margin-right: 10px;
               font-size: 1.6em;
               width: 25px;
-              opacity: .5;
+              opacity: 0.5;
             }
 
             .main-tabs .tabmenu.active {
@@ -241,7 +245,7 @@
               align-items: center;
               text-align: left;
               line-height: 1.3;
-              transition: all .3s ease;
+              transition: all 0.3s ease;
               text-transform: uppercase;
             }
 
@@ -259,7 +263,7 @@
             .sub-tabs .tabmenu .bi {
               width: 20px;
               height: 20px;
-              opacity: .5;
+              opacity: 0.5;
             }
 
             .sub-tabs .tabmenu.active .bi {
@@ -292,7 +296,7 @@
             .article {
               max-height: 0;
               opacity: 0;
-              transition: all .5s ease;
+              transition: all 0.5s ease;
             }
 
             .show-article .article {
@@ -306,7 +310,7 @@
               justify-content: flex-end;
               transform: scale3d(1, 1, 1) !important;
               align-items: center;
-              opacity: .7;
+              opacity: 0.7;
               cursor: pointer;
               display: none;
               padding: 10px 0;
@@ -353,7 +357,6 @@
               display: flex !important;
             }
 
-
             .xlines-button:hover {
               opacity: 1;
             }
@@ -375,7 +378,7 @@
 
             .article-list {
               overflow: hidden;
-              transition: all .5s ease-out;
+              transition: all 0.5s ease-out;
               opacity: 1;
               margin-left: -30px;
               margin-right: -30px;
@@ -454,7 +457,7 @@
             }
 
             .qa-question.active .qax {
-              transform: rotate(180deg)
+              transform: rotate(180deg);
             }
 
             .qa-answer {
@@ -495,7 +498,7 @@
               max-height: 0;
               overflow: hidden;
               opacity: 0;
-              transition: all .3s ease;
+              transition: all 0.3s ease;
             }
 
             .loadstarted .chart {
@@ -527,7 +530,6 @@
                 width: 0;
               }
 
-
               100% {
                 width: 100%;
               }
@@ -557,7 +559,7 @@
               opacity: 1;
             }
 
-            @media (min-width:575px) {
+            @media (min-width: 575px) {
               .main-tabs .tabmenu {
                 width: calc(50% - 15px);
                 margin-bottom: 30px;
@@ -573,7 +575,7 @@
               }
             }
 
-            @media (min-width:768px) {
+            @media (min-width: 768px) {
               .top-solutions {
                 display: flex;
                 justify-content: center;
@@ -600,13 +602,15 @@
                 margin-right: 15px;
               }
 
-              .top-solution:nth-child(3n+3) {
+              .top-solution:nth-child(3n + 3) {
                 margin-right: 0;
               }
 
               .tabcontent .tabcontent {
-                -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                -webkit-animation: slide-bottom 0.5s
+                  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                animation: slide-bottom 0.5s
+                  cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
               }
 
               .article-list {
@@ -614,8 +618,7 @@
               }
             }
 
-            @media (min-width:992px) {
-
+            @media (min-width: 992px) {
               .top-solutions-title {
                 font-size: 18px;
               }
@@ -727,12 +730,13 @@
               }
 
               .qa-question:hover {
-                transition: all .3s ease-in-out;
+                transition: all 0.3s ease-in-out;
                 color: #000;
               }
             }
 
-            @media (min-width:1200px) {}
+            @media (min-width: 1200px) {
+            }
 
             @-webkit-keyframes slide-bottom {
               0% {
@@ -761,9 +765,14 @@
 
           <div class="solutions-index-home">
             <section class="search-results">
-              <div aria-label="Hide search results" onclick="closeSearchResults()" class="xlines-button x is-active">
+              <div
+                aria-label="Hide search results"
+                onclick="closeSearchResults()"
+                class="xlines-button x is-active"
+              >
                 <span class="close-text">HIDE SEARCH RESULTS</span>
-                <span class="lines"></span></div>
+                <span class="lines"></span>
+              </div>
               <h4 class="search-title">Search Results</h4>
               <div id="search-results" class=""></div>
             </section>
@@ -771,78 +780,152 @@
             <section class="top-solutions">
               <h4 class="top-solutions-title">Quick Links</h4>
               <div class="top-solution">
-                <div class="top-solution-link" onclick="clickTab(48000448125, 48000661375, this)"></div>
+                <div
+                  class="top-solution-link"
+                  onclick="clickTab(48000448125, 48000661375, this)"
+                ></div>
                 <div class="img-wrap" data-value="order & payment"></div>
                 <h4 class="top-solution-title">Orders & Payment</h4>
               </div>
 
               <div class="top-solution">
-                <div class="top-solution-link" onclick="clickTab(48000448125, 48000684003, this)"></div>
+                <div
+                  class="top-solution-link"
+                  onclick="clickTab(48000448125, 48000684003, this)"
+                ></div>
                 <div class="img-wrap" data-value="shipping & tracking"></div>
                 <h4 class="top-solution-title">Shipping & Tracking</h4>
               </div>
 
               <div class="top-solution">
-                <div class="top-solution-link" onclick="clickTab(48000448125, 48000684004, this)"></div>
+                <div
+                  class="top-solution-link"
+                  onclick="clickTab(48000448125, 48000684004, this)"
+                ></div>
                 <div class="img-wrap" data-value="returns & exchanges"></div>
                 <h4 class="top-solution-title">Returns & Exchanges</h4>
               </div>
 
               <div class="top-solution">
-                <div class="top-solution-link" onclick="clickTab(48000448125, 48000684005, this)"></div>
-                <div class="img-wrap" data-value="warranty portal"></div>
-                <h4 class="top-solution-title">Warranty Portal</h4>
+                <div
+                  class="top-solution-link"
+                  onclick="clickTab(48000448125, 48000684005, this)"
+                ></div>
+                <div class="img-wrap" data-value="consumer guarantee"></div>
+                <h4 class="top-solution-title">Consumer Guarantee</h4>
               </div>
 
               <div class="top-solution">
-                <a class="top-solution-link" href="{{ portal.new_ticket_url }}"></a>
+                <a
+                  class="top-solution-link"
+                  href="{{ portal.new_ticket_url }}"
+                ></a>
                 <div class="img-wrap" data-value="mail"></div>
                 <h4 class="top-solution-title">Submit a Request</h4>
               </div>
-            </section><!-- .top-solutions -->
+            </section>
+            <!-- .top-solutions -->
 
             <section id="solutions" class="solutions">
               <div class="main-tabs">
-                {% for category in portal.solution_categories %}
-                {% if category.folders_count > 0 %}
-                <button id="tab-{{ category.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ category.id }})" data-value="{{ category.name }}">{{ category.name }}</button>
-                {% endif %}
-                {% endfor %}
-              </div><!-- .main-tabs -->
+                {% for category in portal.solution_categories %} {% if
+                category.folders_count > 0 %}
+                <button
+                  id="tab-{{ category.id }}"
+                  class="tabmenu {% if forloop.first == true %}active{% endif %}"
+                  onclick="boaSwitchTab({{ category.id }})"
+                  data-value="{{ category.name }}"
+                >
+                  {{ category.name }}
+                </button>
+                {% endif %} {% endfor %}
+              </div>
+              <!-- .main-tabs -->
 
               <div class="content-wrap">
                 <div class="sub-tabs">
                   <div class="scroll-indicators">
                     <div class="scroll-indicator scroll-indicator-prev">
-                      swipe <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"><img class="si" aria-hidden="true"
-                        src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="transform: rotate(-90deg);"></div>
+                      swipe
+                      <img
+                        class="si"
+                        aria-hidden="true"
+                        src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                        alt=""
+                        width="9"
+                        height="9"
+                        style="transform: rotate(-90deg)"
+                      /><img
+                        class="si"
+                        aria-hidden="true"
+                        src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                        alt=""
+                        width="9"
+                        height="9"
+                        style="transform: rotate(-90deg)"
+                      />
+                    </div>
                     <div class="scroll-indicator scroll-indicator-next">
-                      <img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
-                  transform: rotate(90deg);"><img class="si" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="9" height="9" style="
-                transform: rotate(90deg);"> swipe</div>
+                      <img
+                        class="si"
+                        aria-hidden="true"
+                        src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                        alt=""
+                        width="9"
+                        height="9"
+                        style="transform: rotate(90deg)"
+                      /><img
+                        class="si"
+                        aria-hidden="true"
+                        src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                        alt=""
+                        width="9"
+                        height="9"
+                        style="transform: rotate(90deg)"
+                      />
+                      swipe
+                    </div>
                   </div>
-                  {% for category in portal.solution_categories %}
-                  {% if category.folders_count > 0  %}
-                  <div class="sub-tabs-track" onscroll="updateScrollIndicator(this)">
-                    <ul data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+                  {% for category in portal.solution_categories %} {% if
+                  category.folders_count > 0 %}
+                  <div
+                    class="sub-tabs-track"
+                    onscroll="updateScrollIndicator(this)"
+                  >
+                    <ul
+                      data-tab-id="tab-{{ category.id }}"
+                      class="tabcontent {% if forloop.first == true %}active{% endif %}"
+                    >
                       {% for folder in category.folders %}
-                      <li id="subtab-{{ folder.id }}" class="tabmenu {% if forloop.first == true %}active{% endif %}" onclick="boaSwitchTab({{ folder.id }}, true)" data-value="{{ folder.name }}"><span class="btn-text">{{ folder.name }}</span></li>
+                      <li
+                        id="subtab-{{ folder.id }}"
+                        class="tabmenu {% if forloop.first == true %}active{% endif %}"
+                        onclick="boaSwitchTab({{ folder.id }}, true)"
+                        data-value="{{ folder.name }}"
+                      >
+                        <span class="btn-text">{{ folder.name }}</span>
+                      </li>
                       {% endfor %}
                     </ul>
                   </div>
-                  {% endif %}
-                  {% endfor %}
-                </div> <!-- .sub-tabs -->
+                  {% endif %} {% endfor %}
+                </div>
+                <!-- .sub-tabs -->
 
                 <div id="articles" class="content">
                   <div id="article-list" class="article-list">
-
                     {% for category in portal.solution_categories %}
-                    <div data-tab-id="tab-{{ category.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
-
-                      {% if category.folders_count > 0 %}
-                      {% for folder in category.folders %}
-                      <div data-tab-id="tab-{{ category.id }}" data-subtab-id="subtab-{{ folder.id }}" class="tabcontent {% if forloop.first == true %}active{% endif %}">
+                    <div
+                      data-tab-id="tab-{{ category.id }}"
+                      class="tabcontent {% if forloop.first == true %}active{% endif %}"
+                    >
+                      {% if category.folders_count > 0 %} {% for folder in
+                      category.folders %}
+                      <div
+                        data-tab-id="tab-{{ category.id }}"
+                        data-subtab-id="subtab-{{ folder.id }}"
+                        class="tabcontent {% if forloop.first == true %}active{% endif %}"
+                      >
                         <h4 class="tabcontent-title">{{ folder.name }}</h4>
                         {% if folder.id == 48000681519x %}
                         <style media="screen">
@@ -873,18 +956,37 @@
                             color: #222;
                           }
                         </style>
-                        <div data-cms-slug="0063cc5833cc" id="pp-widget-root">&nbsp;</div>
+                        <div data-cms-slug="0063cc5833cc" id="pp-widget-root">
+                          &nbsp;
+                        </div>
                         <script src="https://tracking.parcelperform.com/pp-widget.js"></script>
-                        {% endif %}
-                        {% for article in folder.articles %}
+                        {% endif %} {% for article in folder.articles %}
                         <div class="qa-item">
-                          <button id="a{{ article.id }}" class="qa-question" onclick="boaReadMore(this)"><img class="qax" aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-expand-arrow-50.svg" alt="" width="30"
-                              height="30">
-                            {{article.title}}</button>
+                          <button
+                            id="a{{ article.id }}"
+                            class="qa-question"
+                            onclick="boaReadMore(this)"
+                          >
+                            <img
+                              class="qax"
+                              aria-hidden="true"
+                              src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-expand-arrow-50.svg"
+                              alt=""
+                              width="30"
+                              height="30"
+                            />
+                            {{article.title}}
+                          </button>
                           <div class="qa-answer">
-                            {% assign product_description = article.body_plain | split: '.' %}
+                            {% assign product_description = article.body_plain |
+                            split: '.' %}
                             <p>{{ product_description.first }}.</p>
-                            <a class="qa-link" onclick="loadArticle(event, {{ article.id }}, this)" href="{{ article.url }}">Read more</a>
+                            <a
+                              class="qa-link"
+                              onclick="loadArticle(event, {{ article.id }}, this)"
+                              href="{{ article.url }}"
+                              >Read more</a
+                            >
 
                             <div class="chart">
                               <div class="bar"></div>
@@ -894,631 +996,556 @@
                         </div>
                         {% endfor %}
                       </div>
-                      {% endfor %}
-                      {% endif %}
+                      {% endfor %} {% endif %}
                     </div>
                     {% endfor %}
-
-                  </div> <!-- .article-list -->
+                  </div>
+                  <!-- .article-list -->
 
                   <article class="article">
-                    <div aria-label="Close article" onclick="closeArticle()" class="xlines-button x is-active">
+                    <div
+                      aria-label="Close article"
+                      onclick="closeArticle()"
+                      class="xlines-button x is-active"
+                    >
                       <span class="close-text">CLOSE ARTICLE</span>
-                      <span class="lines"></span></div>
-                    <h4 id="article-title" class="tabcontent-title">{% if portal.current_page == 'article_view' %}{{ article.title }}{% endif %}</h4>
+                      <span class="lines"></span>
+                    </div>
+                    <h4 id="article-title" class="tabcontent-title">
+                      {% if portal.current_page == 'article_view' %}{{
+                      article.title }}{% endif %}
+                    </h4>
                     <div id="article-description" class="article-description">
-                      {% if portal.current_page == 'article_view' %}{{ article.body }}{% endif %}
+                      {% if portal.current_page == 'article_view' %}{{
+                      article.body }}{% endif %}
                     </div>
                   </article>
-                </div> <!-- .content -->
-              </div><!-- .content-wrap -->
-
-            </section><!-- .solutions -->
+                </div>
+                <!-- .content -->
+              </div>
+              <!-- .content-wrap -->
+            </section>
+            <!-- .solutions -->
           </div>
 
           <script type="text/javascript">
-            const imap = {
-              "customer care & buying gudes": "heart",
-              "assembly & tutorials": "video-message",
-              "faq's": "inquiry",
-              "covid-19 update": "xbox-cross",
-              "buying guides": "edit-property",
-              "buyers support": "edit-property",
-              "order & payment": "cash-and-credit-card",
-              "shipping & tracking": "tracking",
-              "returns & exchanges": "refresh",
-              "warranty portal": "warranty",
-              "about": "cycling",
-              "archive": "delivery-time",
-              "bike care": "bike-path",
-              "assembly & care": "open-end-wrench",
-              "adjustments & fit": "height",
-              "owner manuals": "user-manual",
-              "live update": "info-popup",
-              "covid-19": "coronavirus",
-              "workshop series": "maintenance",
-              "mail": "request-service"
-            };
+                    const imap = {
+                      "customer care & buying gudes": "heart",
+                      "assembly & tutorials": "video-message",
+                      "faq's": "inquiry",
+                      "covid-19 update": "xbox-cross",
+                      "buying guides": "edit-property",
+                      "buyers support": "edit-property",
+                      "order & payment": "cash-and-credit-card",
+                      "shipping & tracking": "tracking",
+                      "returns & exchanges": "refresh",
+                      "consumer guarantee": "warranty",
+                      "about": "cycling",
+                      "archive": "delivery-time",
+                      "bike care": "bike-path",
+                      "assembly & care": "open-end-wrench",
+                      "adjustments & fit": "height",
+                      "owner manuals": "user-manual",
+                      "live update": "info-popup",
+                      "covid-19": "coronavirus",
+                      "workshop series": "maintenance",
+                      "mail": "request-service"
+                    };
 
-            let articles = [],
-              al,
-              at,
-              ad,
-              sr,
-              solutions,
-              ga_queue = [];
+                    let articles = [],
+                      al,
+                      at,
+                      ad,
+                      sr,
+                      solutions,
+                      ga_queue = [];
 
-            function addToGoogleAnalytics(link_url) {
-              if (typeof ga !== undefined) {
-                // console.log('added to ga ' + link_url);
-                ga('send', 'pageview', link_url);
-              } else {
-                ga_queue.push(link_url);
-              }
+                    function addToGoogleAnalytics(link_url) {
+                      if (typeof ga !== undefined) {
+                        // console.log('added to ga ' + link_url);
+                        ga('send', 'pageview', link_url);
+                      } else {
+                        ga_queue.push(link_url);
+                      }
+                    }
+
+                    function updateNav(page_url) {
+                      let temp = [],
+                        articleLink,
+                        folderBtn,
+                        categoryBtn,
+                        articleWrap,
+                        linkId;
+                      if (page_url.indexOf('/solutions/folders/') !== -1) {
+
+                        temp = page_url.split('/solutions/folders/');
+                        if (temp.length > 1) {
+                          linkId = temp[1];
+                          if ( linkId.indexOf('?') > -1 ){
+                            temp = temp[1].split('?');
+                            linkId = temp[0];
+                          }
+                          folderBtn = document.getElementById('subtab-' + linkId);
+                          document.getElementById(folderBtn.parentNode.dataset.tabId).click();
+                          folderBtn.click();
+                        }
+                      } else if (page_url.indexOf('/solutions/articles/') !== -1) {
+                        temp = page_url.split('/solutions/articles/');
+
+            if (page_url.indexOf("?") > 0) {
+            	 page_url = page_url.substring(0, page_url.indexOf("?"));
             }
+                        if (temp.length > 1) {
 
-            function updateNav(page_url) {
-              let temp = [],
-                articleLink,
-                folderBtn,
-                categoryBtn,
-                articleWrap;
-              if (page_url.indexOf('/solutions/folders/') !== -1) {
-                temp = page_url.split('/solutions/folders/');
-                if (temp.length > 1) {
-                  folderBtn = document.getElementById('subtab-' + temp[1]);
-                  document.getElementById(folderBtn.parentNode.dataset.tabId).click();
-                  folderBtn.click();
-                }
-              } else if (page_url.indexOf('/solutions/articles/') !== -1) {
-                temp = page_url.split('/solutions/articles/');
-                if (temp.length > 1) {
-                  articleLink = document.querySelectorAll('a[href="' + page_url + '"]')[0];
-                  articleWrap = articleLink.parentNode.parentNode.parentNode;
-                  document.getElementById(articleWrap.dataset.tabId).click();
-                  document.getElementById(articleWrap.dataset.subtabId).click();
-                  articleLink.click();
+                          articleLink = document.querySelectorAll('a[href="' + page_url + '"]')[0];
+                          articleWrap = articleLink.parentNode.parentNode.parentNode;
+                          document.getElementById(articleWrap.dataset.tabId).click();
+                          document.getElementById(articleWrap.dataset.subtabId).click();
+                          articleLink.click();
 
-                }
-              } else if (page_url.indexOf('/solutions/') !== -1) {
-                temp = page_url.split('/solutions/');
-                if (temp.length > 1) {
-                  document.getElementById('tab-' + temp[1]).click();
-                }
-              }
-            }
+                        }
+                      } else if (page_url.indexOf('/solutions/') !== -1) {
+                        temp = page_url.split('/solutions/');
+                        if (temp.length > 1) {
+                          linkId = temp[1];
+                          if ( linkId.indexOf('?') > -1 ){
+                            temp = temp[1].split('?');
+                            linkId = temp[0];
+                          }
+                          document.getElementById('tab-' + linkId ).click();
+                        }
+                      }
+                    }
 
-            function clickTab(mainTabId, subTabId, e) {
-              //inactivate panels
-              let scs = document.querySelectorAll('.top-solution');
+                    function clickTab(mainTabId, subTabId, e) {
+                      //inactivate panels
+                      let scs = document.querySelectorAll('.top-solution');
 
-              if (scs.length) {
-                scs.forEach(sc => {
-                  sc.classList.remove('active');
-                });
-              }
-              e.classList.add('active');
-              document.getElementById('tab-' + mainTabId).click();
-              document.getElementById('subtab-' + subTabId).click();
-              solutions.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }
+                      if (scs.length) {
+                        scs.forEach(sc => {
+                          sc.classList.remove('active');
+                        });
+                      }
+                      e.classList.add('active');
+                      document.getElementById('tab-' + mainTabId).click();
+                      document.getElementById('subtab-' + subTabId).click();
+                      solutions.scrollIntoView({
+                        behavior: 'smooth'
+                      });
+                    }
 
-            // accordion / read more
-            function boaReadMore(e) {
-              //close all panels
-              let qaqs = document.querySelectorAll('.qa-question');
+                    // accordion / read more
+                    function boaReadMore(e) {
+                      //close all panels
+                      let qaqs = document.querySelectorAll('.qa-question');
 
-              qaqs.forEach(qaq => {
-                if (qaq.id != e.id) {
-                  qaq.classList.remove('active');
-                  qaq.parentNode.classList.remove("active");
-                  qaq.nextElementSibling.style.maxHeight = null;
-                }
-              });
+                      qaqs.forEach(qaq => {
+                        if (qaq.id != e.id) {
+                          qaq.classList.remove('active');
+                          qaq.parentNode.classList.remove("active");
+                          qaq.nextElementSibling.style.maxHeight = null;
+                        }
+                      });
 
-              e.classList.toggle("active");
-              e.parentNode.classList.toggle("active");
-              let panel = e.nextElementSibling;
-              if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-              } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-              }
+                      e.classList.toggle("active");
+                      e.parentNode.classList.toggle("active");
+                      let panel = e.nextElementSibling;
+                      if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                      } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                      }
 
-              closeArticle();
-              // solutions.scrollIntoView({
-              //   behavior: 'smooth'
-              // });
-            }
+                      closeArticle();
+                      // solutions.scrollIntoView({
+                      //   behavior: 'smooth'
+                      // });
+                    }
 
-            //tabs
-            function boaSwitchTab(tab_id, isChild = false) {
+                    //tabs
+                    function boaSwitchTab(tab_id, isChild = false) {
 
-              let menu_selector = isChild ? 'subtab-' : 'tab-',
-                active_menu = document.getElementById(menu_selector + tab_id),
-                tabmenus = active_menu.parentNode.querySelectorAll(".tabmenu"),
-                content,
-                active_pane;
+                      let menu_selector = isChild ? 'subtab-' : 'tab-',
+                        active_menu = document.getElementById(menu_selector + tab_id),
+                        tabmenus = active_menu.parentNode.querySelectorAll(".tabmenu"),
+                        content,
+                        active_pane;
 
-              if (tabmenus.length) {
-                tabmenus.forEach(tm => {
-                  tm.className = 'tabmenu';
-                });
-              }
-              active_menu.className = 'tabmenu active';
+                      if (tabmenus.length) {
+                        tabmenus.forEach(tm => {
+                          tm.className = 'tabmenu';
+                        });
+                      }
+                      active_menu.className = 'tabmenu active';
 
-              if (isChild) {
-                active_pane = document.querySelectorAll('[data-subtab-id="' + active_menu.id + '"]');
+                      if (isChild) {
+                        active_pane = document.querySelectorAll('[data-subtab-id="' + active_menu.id + '"]');
 
-                if (active_pane.length) {
-                  content = active_pane[0].parentNode.querySelectorAll(".tabcontent");
-                  if (content.length) {
-                    content.forEach(tc => {
-                      tc.className = 'tabcontent';
+                        if (active_pane.length) {
+                          content = active_pane[0].parentNode.querySelectorAll(".tabcontent");
+                          if (content.length) {
+                            content.forEach(tc => {
+                              tc.className = 'tabcontent';
+                            });
+                          }
+                          active_pane[0].className = 'tabcontent active';
+                        }
+
+                        addToGoogleAnalytics('https://support.bikesonline.com/support/solutions/folders/' + tab_id);
+                      } else {
+                        content = document.querySelectorAll(".sub-tabs  .tabcontent, .article-list > .tabcontent");
+                        if (content.length) {
+                          content.forEach(tc => {
+
+                            if (tc.dataset.tabId == active_menu.id) {
+
+                              tc.className = 'tabcontent active';
+                            } else {
+                              tc.className = 'tabcontent';
+                            }
+                          });
+                        }
+                        document.getElementById('solutions').scrollIntoView({
+                          behavior: 'smooth'
+                        });
+                        addToGoogleAnalytics('https://support.bikesonline.com/support/solutions/' + tab_id);
+                      }
+                      closeArticle();
+                      solutions.scrollIntoView({
+                        behavior: 'smooth'
+                      });
+                    }
+
+                    // scroll indicators
+                    function updateScrollIndicator(e) {
+                      let sinext = document.querySelector('.scroll-indicator-next'),
+                        siprev = document.querySelector('.scroll-indicator-prev');
+
+                      if (e.offsetWidth + e.scrollLeft >= e.scrollWidth) {
+                        sinext.style.opacity = 0;
+                      } else {
+                        sinext.style.opacity = 1;
+                      }
+
+                      if (e.scrollLeft == 0) {
+                        siprev.style.opacity = 0;
+                      } else {
+                        siprev.style.opacity = 1;
+                      }
+                    }
+
+                    function openArticle(title, description) {
+                      at.innerHTML = title;
+                      ad.innerHTML = description;
+                      al.parentNode.classList.add('show-article');
+                    }
+
+                    function closeArticle() {
+                      at.innerHTML = "";
+                      ad.innerHTML = "";
+                      al.parentNode.classList.remove('show-article');
+                      var aheight = al.scrollHeight + 110;
+                      al.style.maxHeight = aheight + "px";
+                    }
+
+                    function startProgressBar(e) {
+                      // Change the variable to modify the speed of the number increasing from 0 to (ms)
+                      let SPEED = 20,
+                        limit = parseInt(100, 10);
+
+                      e.parentNode.parentNode.classList.add('loadstarted');
+
+                      for (let i = 0; i <= limit; i++) {
+                        setTimeout(function() {
+                          e.innerHTML = i + "%";
+                        }, SPEED * i);
+                      }
+                    }
+
+
+
+                    function loadArticle(ev, aid, e) {
+                      ev.preventDefault();
+                      let data;
+
+                      if (typeof articles[aid] !== 'undefined') {
+                        data = articles[aid];
+                        openArticle(data.title, data.description);
+            var tl =  ad.querySelectorAll("#searchfield1").length;
+            	if(tl == 1)
+            	{
+            		ad.querySelector("#searchfield1").innerHTML = '<input type="text" id="search-table-name" placeholder="Search for names.." class="search-table-name"  value="">';
+            	}
+                      } else {
+                        let request = new XMLHttpRequest();
+
+
+                        request.open('GET', 'https://bicyclesonline.freshdesk.com/api/v2/solutions/articles/' + aid, true);
+                        request.setRequestHeader('Authorization', 'Basic ' + btoa('T6HFTeXjCRyW2I5Y4DN:x'));
+                        request.timeout = 10000;
+                        request.onloadstart = function() {
+                          startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
+                        }
+                        request.onload = function() {
+                          if (this.status >= 200 && this.status < 400) {
+                            // Success!
+
+                            data = JSON.parse(this.response);
+                            openArticle(data.title, data.description);
+            	var tl =  ad.querySelectorAll("#searchfield1").length;
+            	if(tl == 1)
+            	{
+            		ad.querySelector("#searchfield1").innerHTML = '<input type="text" id="search-table-name" placeholder="Search for names.." class="search-table-name"  value="">';
+            	}
+
+                            articles[data.id] = data;
+                            addToGoogleAnalytics(e.href);
+
+                          } else {
+                            // We reached our target server, but it returned an error
+                            closeArticle();
+
+                          }
+                          e.parentNode.classList.remove('loadstarted');
+                        };
+
+                        request.onerror = function() {
+                          // There was a connection error of some sort
+                          closeArticle();
+                          e.parentNode.classList.remove('loadstarted');
+                        };
+
+
+                        request.send();
+                      }
+
+                    }
+
+                    function openSearchResults() {
+                      document.body.classList.add('search');
+                      sr.style.maxHeight = (sr.scrollHeight + 110) + "px";
+                    }
+
+                    function closeSearchResults() {
+                      document.body.classList.remove('search');
+                      sr.style.maxHeight = 0;
+                      sr.innerHTML = '';
+                    }
+
+                    function loadSearchResults(e) {
+                      e.preventDefault();
+                      let search = new XMLHttpRequest(),
+                        searchTerms = encodeURI(document.getElementById('support-search-input').value).split(' '),
+                        st = searchTerms.join('+'),
+                        results = [],
+                        resultsHtml = '';
+
+                      st = encodeURI(st);
+
+
+                      search.open('GET', '/support/search?term=' + st + '&match_matches=10', true);
+                      search.setRequestHeader('Authorization', 'Basic ' + btoa('T6HFTeXjCRyW2I5Y4DN:x'));
+                      search.setRequestHeader('Accept', 'application/json');
+
+                      search.timeout = 10000;
+                      // search.onloadstart = function() {
+                      //   startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
+                      // }
+                      search.onload = function() {
+                        if (this.status >= 200 && this.status < 400) {
+                          // Success!
+
+                          results = JSON.parse(this.response);
+                          results.forEach(r => {
+                            resultsHtml += '<li class="r-item" onclick="updateNav(\'' + r.url + '\')" ><div class="r-header"><div class="r-title">' + r.title + '</div>' +
+                              '<span class="label label-small label-light">' + r.type + '</span></div>' +
+                              '<div class="r-desc">' + r.desc + '</div>'
+                              // + '<p class="help-text">' + '</p>'
+                              +
+                              '</li>';
+                          });
+
+                          sr.innerHTML = resultsHtml;
+                          openSearchResults();
+                        } else {
+                          // We reached our target server, but it returned an error
+                          closeSearchResults();
+
+                        }
+                      };
+
+                      search.onerror = function() {
+                        // There was a connection error of some sort
+                        closeSearchResults();
+                      };
+
+
+                      search.send();
+                    }
+                    var BoaUtil = (function() {
+
+                      var waitForObject = function(obj, timeout = 0) {
+                        /**
+                         * Wait for an element before resolving a promise
+                         * @param {String} querySelector - Selector of element to wait for
+                         * @param {Integer} timeout - Milliseconds to wait before timing out, or 0 for no timeout
+                         */
+                        const startTime = new Date().getTime();
+                        return new Promise((resolve, reject) => {
+                          const timer = setInterval(() => {
+                            const now = new Date().getTime();
+
+                            if (typeof obj != undefined) {
+                              clearInterval(timer);
+                              resolve();
+                            } else if (timeout && now - startTime >= timeout) {
+                              clearInterval(timer);
+                              reject();
+                            }
+                          }, 100);
+                        });
+                      }
+                      return {
+                        waitForObject: waitForObject
+                      }
+                    })();
+
+                    function addQueueToAnalytics() {
+                      ga_queue.forEach(link_url => {
+                        addToGoogleAnalytics(link_url);
+                      });
+                    }
+
+                    jQuery(document).ready(function() {
+                      al = document.getElementById('article-list');
+                      at = document.getElementById('article-title');
+                      ad = document.getElementById('article-description');
+                      solutions = document.getElementById('solutions');
+                      sr = document.getElementById('search-results');
+
+                      if (ga_queue.length) {
+                        if (typeof ga != undefined) {
+                          addQueueToAnalytics();
+                        } else {
+                          BoaUtil.waitForObject(ga, 10000).then(function() {
+                            addQueueToAnalytics();
+                          }).catch((e) => {
+                            console.log("countdown timer didn't start");
+                            if (e) {
+                              console.log(e);
+                            }
+                          });
+                        }
+                      }
+
+
+
+                      {% if portal.current_page == 'article_view' %}
+                      articles[ {{ article.id }} ] = {
+                        'id': {{ article.id }},
+                        'title': document.getElementById('article-title').innerHTML,
+                        'description': document.getElementById('article-description').innerHTML
+                      }
+                      {% else %}
+                      closeArticle();
+                      {% endif %}
+
+                      updateNav(window.location.href.toString().split(window.location.host)[1]);
+                      jQuery('.tabmenu').each(function() {
+                        let tval = jQuery(this).attr('data-value').toLowerCase(),
+                          icon = 'bicycle';
+                        if (tval && tval in imap) {
+                          icon = imap[tval];
+                        }
+                        jQuery(this).prepend('<img aria-hidden="true" src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-' + icon + '-50.svg" class="bi" width="30" height="30" alt="" />');
+                      });
+
+                      jQuery('.img-wrap').each(function() {
+                        let tval = jQuery(this).attr('data-value'),
+                          icon = 'bicycle';
+                        if (tval && tval in imap) {
+                          icon = imap[tval];
+                        }
+                        jQuery(this).prepend('<img aria-hidden="true" src="https://cdn.shopify.com/s/files/1/0834/5213/3657/files/bo-' + icon + '-50.svg" class="bi" width="50" height="50" alt="" />');
+                      });
                     });
-                  }
-                  active_pane[0].className = 'tabcontent active';
-                }
-
-                addToGoogleAnalytics('https://support.bicyclesonline.com.au/support/solutions/folders/' + tab_id);
-              } else {
-                content = document.querySelectorAll(".sub-tabs  .tabcontent, .article-list > .tabcontent");
-                if (content.length) {
-                  content.forEach(tc => {
-
-                    if (tc.dataset.tabId == active_menu.id) {
-
-                      tc.className = 'tabcontent active';
-                    } else {
-                      tc.className = 'tabcontent';
-                    }
-                  });
-                }
-                document.getElementById('solutions').scrollIntoView({
-                  behavior: 'smooth'
-                });
-                addToGoogleAnalytics('https://support.bicyclesonline.com.au/support/solutions/' + tab_id);
-              }
-              closeArticle();
-              solutions.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }
-
-            // scroll indicators
-            function updateScrollIndicator(e) {
-              let sinext = document.querySelector('.scroll-indicator-next'),
-                siprev = document.querySelector('.scroll-indicator-prev');
-
-              if (e.offsetWidth + e.scrollLeft >= e.scrollWidth) {
-                sinext.style.opacity = 0;
-              } else {
-                sinext.style.opacity = 1;
-              }
-
-              if (e.scrollLeft == 0) {
-                siprev.style.opacity = 0;
-              } else {
-                siprev.style.opacity = 1;
-              }
-            }
-
-            function openArticle(title, description) {
-              at.innerHTML = title;
-              ad.innerHTML = description;
-              al.parentNode.classList.add('show-article');
-            }
-
-            function closeArticle() {
-              at.innerHTML = "";
-              ad.innerHTML = "";
-              al.parentNode.classList.remove('show-article');
-              var aheight = al.scrollHeight + 110;
-              al.style.maxHeight = aheight + "px";
-            }
-
-            function startProgressBar(e) {
-              // Change the variable to modify the speed of the number increasing from 0 to (ms)
-              let SPEED = 20,
-                limit = parseInt(100, 10);
-
-              e.parentNode.parentNode.classList.add('loadstarted');
-
-              for (let i = 0; i <= limit; i++) {
-                setTimeout(function() {
-                  e.innerHTML = i + "%";
-                }, SPEED * i);
-              }
-            }
-
-
-
-            function loadArticle(ev, aid, e) {
-              ev.preventDefault();
-              let data;
-
-              if (typeof articles[aid] !== 'undefined') {
-                data = articles[aid];
-                openArticle(data.title, data.description);
-              } else {
-                let request = new XMLHttpRequest();
-
-
-                request.open('GET', 'https://bicyclesonline.freshdesk.com/api/v2/solutions/articles/' + aid, true);
-                request.setRequestHeader('Authorization', 'Basic ' + btoa('2IVc7geJIrXlFHmcMz:x'));
-                request.timeout = 10000;
-                request.onloadstart = function() {
-                  startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
-                }
-                request.onload = function() {
-                  if (this.status >= 200 && this.status < 400) {
-                    // Success!
-
-                    data = JSON.parse(this.response);
-                    openArticle(data.title, data.description);
-                    articles[data.id] = data;
-                    addToGoogleAnalytics(e.href);
-
-                  } else {
-                    // We reached our target server, but it returned an error
-                    closeArticle();
-
-                  }
-                  e.parentNode.classList.remove('loadstarted');
-                };
-
-                request.onerror = function() {
-                  // There was a connection error of some sort
-                  closeArticle();
-                  e.parentNode.classList.remove('loadstarted');
-                };
-
-
-                request.send();
-              }
-
-            }
-
-            function openSearchResults() {
-              document.body.classList.add('search');
-              sr.style.maxHeight = (sr.scrollHeight + 110) + "px";
-            }
-
-            function closeSearchResults() {
-              document.body.classList.remove('search');
-              sr.style.maxHeight = 0;
-              sr.innerHTML = '';
-            }
-
-            function loadSearchResults(e) {
-              e.preventDefault();
-              let search = new XMLHttpRequest(),
-                searchTerms = encodeURI(document.getElementById('support-search-input').value).split(' '),
-                st = searchTerms.join('+'),
-                results = [],
-                resultsHtml = '';
-
-              st = encodeURI(st);
-
-
-              search.open('GET', '/support/search?term=' + st + '&match_matches=10', true);
-              search.setRequestHeader('Authorization', 'Basic ' + btoa('2IVc7geJIrXlFHmcMz:x'));
-              search.setRequestHeader('Accept', 'application/json');
-
-              search.timeout = 10000;
-              // search.onloadstart = function() {
-              //   startProgressBar(e.nextElementSibling.querySelectorAll('.progress')[0]);
-              // }
-              search.onload = function() {
-                if (this.status >= 200 && this.status < 400) {
-                  // Success!
-
-                  results = JSON.parse(this.response);
-                  results.forEach(r => {
-                    resultsHtml += '<li class="r-item" onclick="updateNav(\'' + r.url + '\')" ><div class="r-header"><div class="r-title">' + r.title + '</div>' +
-                      '<span class="label label-small label-light">' + r.type + '</span></div>' +
-                      '<div class="r-desc">' + r.desc + '</div>'
-                      // + '<p class="help-text">' + '</p>'
-                      +
-                      '</li>';
-                  });
-
-                  sr.innerHTML = resultsHtml;
-                  openSearchResults();
-                } else {
-                  // We reached our target server, but it returned an error
-                  closeSearchResults();
-
-                }
-              };
-
-              search.onerror = function() {
-                // There was a connection error of some sort
-                closeSearchResults();
-              };
-
-
-              search.send();
-            }
-            var BoaUtil = (function() {
-
-              var waitForObject = function(obj, timeout = 0) {
-                /**
-                 * Wait for an element before resolving a promise
-                 * @param {String} querySelector - Selector of element to wait for
-                 * @param {Integer} timeout - Milliseconds to wait before timing out, or 0 for no timeout
-                 */
-                const startTime = new Date().getTime();
-                return new Promise((resolve, reject) => {
-                  const timer = setInterval(() => {
-                    const now = new Date().getTime();
-
-                    if (typeof obj != undefined) {
-                      clearInterval(timer);
-                      resolve();
-                    } else if (timeout && now - startTime >= timeout) {
-                      clearInterval(timer);
-                      reject();
-                    }
-                  }, 100);
-                });
-              }
-              return {
-                waitForObject: waitForObject
-              }
-            })();
-
-            function addQueueToAnalytics() {
-              ga_queue.forEach(link_url => {
-                addToGoogleAnalytics(link_url);
-              });
-            }
-
-            jQuery(document).ready(function() {
-              al = document.getElementById('article-list');
-              at = document.getElementById('article-title');
-              ad = document.getElementById('article-description');
-              solutions = document.getElementById('solutions');
-              sr = document.getElementById('search-results');
-
-              if (ga_queue.length) {
-                if (typeof ga != undefined) {
-                  addQueueToAnalytics();
-                } else {
-                  BoaUtil.waitForObject(ga, 10000).then(function() {
-                    addQueueToAnalytics();
-                  }).catch((e) => {
-                    console.log("countdown timer didn't start");
-                    if (e) {
-                      console.log(e);
-                    }
-                  });
-                }
-              }
-
-
-
-              {% if portal.current_page == 'article_view' %}
-              articles[ {{ article.id }} ] = {
-                'id': {{ article.id }},
-                'title': document.getElementById('article-title').innerHTML,
-                'description': document.getElementById('article-description').innerHTML
-              }
-              {% else %}
-              closeArticle();
-              {% endif %}
-
-              updateNav(window.location.href.toString().split(window.location.host)[1]);
-              jQuery('.tabmenu').each(function() {
-                let tval = jQuery(this).attr('data-value').toLowerCase(),
-                  icon = 'bicycle';
-                if (tval && tval in imap) {
-                  icon = imap[tval];
-                }
-                jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="30" height="30" alt="" />');
-              });
-
-              jQuery('.img-wrap').each(function() {
-                let tval = jQuery(this).attr('data-value'),
-                  icon = 'bicycle';
-                if (tval && tval in imap) {
-                  icon = imap[tval];
-                }
-                jQuery(this).prepend('<img aria-hidden="true" src="https://images.bikesonline.com/assets/images/bo-' + icon + '-50.svg" class="bi" width="50" height="50" alt="" />');
-              });
-            });
           </script>
-          {% endif %}
-
-          {% else %}
-
-          {% if portal.current_page == 'profile_edit' %}
+          {% endif %} {% else %} {% if portal.current_page == 'profile_edit' %}
           <div id="profile-edit">
-            {% endif %}
-
-            {{content_for_layout}}
-
-            {% if portal.current_page == 'profile_edit' %}
+            {% endif %} {{content_for_layout}} {% if portal.current_page ==
+            'profile_edit' %}
           </div>
-          {% endif %}
-          {% endif %}
+          {% endif %} {% endif %}
         </div>
       </div>
     </div>
   </div>
-  <div class="layout__footer">
-    {{footer}}
-
-  </div>
-
-
+  <div class="layout__footer">{{footer}}</div>
 
   <script>
-    (function($) {
-      function clipper(min, max) {
-        return function(o) {
-          if (o > max) return max;
-          if (o < min) return min;
-          return o;
-        };
-      }
-
-      var BT_SETTINGS = {
-        css: {
-          activeClass: 'is-active',
-          hiddenClass: 'is-hidden'
-        }
-      };
-
-      var opacityClipper = clipper(0, 1);
-      var $window = $(window);
-      var $heroUnit = $('[data-hero-unit]');
-      var $topbar = $('[data-topbar]');
-      var topbarHeight = parseInt($topbar.height());
-      var $scrollToTop = $('[data-scroll-to-top]');
-      var $searchBox;
-
-      if ($heroUnit.length) {
-        $searchBox = $heroUnit.find('[data-search-box]');
-      }
-
-      $scrollToTop.click(function() {
-        $('html, body').animate({
-          scrollTop: 0
-        }, 1000);
-        return false;
-      });
-
-      var bindEffects = function() {
-        var scrolled = $window.scrollTop();
-        if (scrolled > topbarHeight) {
-          $scrollToTop.addClass('active');
-        } else {
-          $scrollToTop.removeClass('active');
-        }
-
-        if ($heroUnit.length) {
-
-          $searchBox.css({
-            'opacity': opacityClipper(1 - opacityClipper(scrolled * 0.003))
-          });
-        }
-      };
-
-      $window.on('scroll.theme', bindEffects);
-
-      $('[data-toggle-menu]').click(function() {
-        $(this).toggleClass(BT_SETTINGS.css.activeClass);
-        $('[data-menu]').toggle();
-      });
-
-
-
-      $("[data-link]").click(function() {
-        window.location.href = $(this).attr("data-link");
-        return false;
-      });
-
-
-
-      $('.fa-spin').empty();
-      if (jQuery(location).attr("pathname") !== '/support/tickets/new') {
-        function initFreshChat() {
-          window.fcWidget.init({
-            token: "b2b0ad38-149b-48a5-94ca-707a37d94551",
-            host: "https://wchat.freshchat.com",
-            siteId: "bicyclesonline",
-            tags: ["AUS"],
-            faqTags: {
-              tags: ['AUS'],
-              filterType: 'category'
-            },
-            config: {
-              showFAQOnOpen: true,
-              hideFAQ: false,
-              content: {
-                headers: {
-                  chat: 'Live Chat - Message us'
-                }
-              }
+        (function($) {
+          var BT_SETTINGS = {
+            css: {
+              activeClass: 'is-active',
+              hiddenClass: 'is-hidden'
             }
+          };
+
+
+          var $window = $(window);
+          var $heroUnit = $('[data-hero-unit]');
+          var $topbar = $('[data-topbar]');
+          var topbarHeight = parseInt($topbar.height());
+          var $scrollToTop = $('[data-scroll-to-top]');
+          var $searchBox;
+
+
+          $scrollToTop.click(function() {
+            $('html, body').animate({
+              scrollTop: 0
+            }, 1000);
+            return false;
           });
+
+
+
+          $('[data-toggle-menu]').click(function() {
+            $(this).toggleClass(BT_SETTINGS.css.activeClass);
+            $('[data-menu]').toggle();
+          });
+    $('body').on('keyup', '#search-table-name', function (e) {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search-table-name");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("searchname-table");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
         }
-
-        function initialize(i, t) {
-          var e;
-          i.getElementById(t) ? initFreshChat() : ((e = i.createElement("script")).id = t, e.async = !0, e.src = "https://wchat.freshchat.com/js/widget.js", e.onload = initFreshChat, i.head.appendChild(e))
-        }
-
-        function initiateCall() {
-          initialize(document, "freshchat-js-sdk")
-        }
-        window.addEventListener ? window.addEventListener("load", initiateCall, !1) : window.attachEvent("load", initiateCall, !1);
-
-
-      }
-
-
-      function openFilters() {
-        $('body').addClass('noscroll');
-        $(".mob-overlay-filter").show();
-        $("#left-sidebar").width('320');
-        $("#test-menu-left").css('transform', 'translateX(0)');
-      }
-
-      function closeFilters() {
-        $(".mob-overlay-filter").hide();
-        $("body").removeClass("noscroll");
-        $("#left-sidebar").width('0');
-      }
-      $(document).ready(function() {
-        $(".mob-overlay-filter").click(function() {
-          $(".mob-overlay-filter").hide();
-          $("body").removeClass("noscroll");
-          $("#left-sidebar").width('0');
-        });
-        $(".slide-menu__control").click(function() {
-          $('body').addClass('noscroll');
-          $(".mob-overlay").show();
-        });
-        $(".mob-overlay").click(function() {
-          $(".mob-overlay").hide();
-          $("body").removeClass("noscroll");
-        });
-      });
-    })(jQuery);
-    jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').on('change', function() {
-
-      if (this.value == 'Sales' || this.value == 'Other') {
-
-        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required', false);
-        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
-
-
-      } else {
-        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required', true);
-        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').addClass("required");
-
-
-
-
-      }
-
-      if (jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').val() == 'General Questions' || jQuery('#helpdesk_ticket_custom_field_cf_topic327465_1174359').val() == 'Technical Support') {
-        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
-        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required', false);
-      } else {
-        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required', true);
-        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').addClass("required");
-      }
-      if (this.value == 'Sales' || this.value == 'All Other Enquiries') {
-
-        jQuery("#helpdesk_ticket_custom_field_cf_invoice_number752440_1174359").prop('required', false);
-        jQuery('label[for=helpdesk_ticket_cf_invoice_number752440_1174359]').removeClass("required");
-
-
       }
     });
+    if($("#searchfield1").length > 0) {
+    		$("#searchfield1").append('<input type="text" id="search-table-name" placeholder="Search for names.." class="search-table-name"  value="">');
+    	}
+
+
+          $("[data-link]").click(function() {
+            window.location.href = $(this).attr("data-link");
+            return false;
+          });
+
+
+
+          $('.fa-spin').empty();
   </script>
+</div>
